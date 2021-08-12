@@ -1,5 +1,5 @@
 {
-  "name": "@ibm-cloud/ibm-data-virtualization-on-cloud",
+  "name": "@ibm-cloud/data-virtualization-on-cloud",
   "version": "0.0.1",
   "description": "IBM Data Virtualization on Cloud Node.js SDK",
   "repository": {

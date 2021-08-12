@@ -106,9 +106,7 @@ class DataVirtualizationV1 extends BaseService {
     const _params = { ...params };
 
     const sdkHeaders = getSdkHeaders(
-      DataVirtualizationV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'listDatasourceConnections'
+      DataVirtualizationV1.DEFAULT_SERVICE_NAME, 'v1', 'listDatasourceConnections'
     );
 
     const parameters = {
@@ -164,11 +162,7 @@ class DataVirtualizationV1 extends BaseService {
       'asset_category': _params.assetCategory,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      DataVirtualizationV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'addDatasourceConnection'
-    );
+    const sdkHeaders = getSdkHeaders(DataVirtualizationV1.DEFAULT_SERVICE_NAME, 'v1', 'addDatasourceConnection');
 
     const parameters = {
       options: {

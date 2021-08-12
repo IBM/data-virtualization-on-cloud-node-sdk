@@ -31,6 +31,9 @@
     "check-packages": "installed-check -e -d -v"
   },
   "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public"
+  },
   "engines": {
     "node": ">=10.0.0"
   },
@@ -71,6 +74,8 @@
       "<rootDir>/test/",
       "<rootDir>/examples/"
     ],
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "verbose": false,
+    "silent": false
   }
 }

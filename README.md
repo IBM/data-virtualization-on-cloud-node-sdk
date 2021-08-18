@@ -1,7 +1,8 @@
 [![Build Status](https://travis-ci.com/IBM/data-virtualization-on-cloud-node-sdk.svg?branch=main)](https://travis-ci.com/IBM/data-virtualization-on-cloud-node-sdk.svg?branch=main)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+
 <!--
-[![npm-version](https://img.shields.io/npm/v/IBM/data-virtualization-on-cloud-node-sdk.svg)](https://www.npmjs.com/package/ibm-platform-services)
+[![npm-version](https://img.shields.io/npm/v/IBM/data-virtualization-on-cloud-node-sdk.svg)](https://www.npmjs.com/package/@ibm-cloud/data-virtualization-on-cloud)
 [![codecov](https://codecov.io/gh/IBM/data-virtualization-on-cloud-node-sdk/branch/main/graph/badge.svg)](https://codecov.io/gh/IBM/data-virtualization-on-cloud-node-sdk)
 -->
 # IBM Data Virtualization on Cloud Node.js SDK
@@ -46,7 +47,7 @@ IBM Cloud services:
 
 Service Name | Import Path
 --- | ---
-[Data Virtualization on Cloud](https://cloud.ibm.com/apidocs/data-virtualization-on-cloud-node-sdk) | data-virtualization
+[Data Virtualization on Cloud](https://cloud.ibm.com/apidocs/data-virtualization-on-cloud) | @ibm-cloud/data-virtualization-on-cloud/data-virtualization
 
 ## Prerequisites
 * You need an [IBM Cloud](https://cloud.ibm.com/registration) account.
@@ -59,7 +60,7 @@ Service Name | Import Path
 ## Installation
 
 ```sh
-npm install @ibm-cloud/ibm-data-virtualization-on-cloud
+npm install @ibm-cloud/data-virtualization-on-cloud
 ```
 
 ## Authentication

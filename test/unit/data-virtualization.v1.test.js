@@ -26,6 +26,7 @@ const {
   checkUrlAndMethod,
   checkMediaHeaders,
   expectToBePromise,
+  checkUserHeader,
   checkForSuccessfulExecution,
 } = unitTestUtils;
 
@@ -101,12 +102,11 @@ describe('DataVirtualizationV1', () => {
   });
   describe('listDatasourceConnections', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __listDatasourceConnectionsTest() {
         // Construct the params object for operation listDatasourceConnections
         const params = {};
 
-        const listDatasourceConnectionsResult =
-          dataVirtualizationService.listDatasourceConnections(params);
+        const listDatasourceConnectionsResult = dataVirtualizationService.listDatasourceConnections(params);
 
         // all methods should return a Promise
         expectToBePromise(listDatasourceConnectionsResult);
@@ -114,12 +114,27 @@ describe('DataVirtualizationV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/v2/datasource/connections', 'GET');
+        checkUrlAndMethod(mockRequestOptions, '/v2/datasource/connections', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __listDatasourceConnectionsTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.enableRetries();
+        __listDatasourceConnectionsTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.disableRetries();
+        __listDatasourceConnectionsTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -182,7 +197,7 @@ describe('DataVirtualizationV1', () => {
         warehouse: 'wdpcondev',
       };
 
-      test('should pass the right params to createRequest', () => {
+      function __addDatasourceConnectionTest() {
         // Construct the params object for operation addDatasourceConnection
         const datasourceType = 'DB2';
         const name = 'DB2';
@@ -190,15 +205,14 @@ describe('DataVirtualizationV1', () => {
         const properties = postDatasourceConnectionParametersPropertiesModel;
         const assetCategory = 'USER';
         const params = {
-          datasourceType,
-          name,
-          originCountry,
-          properties,
-          assetCategory,
+          datasourceType: datasourceType,
+          name: name,
+          originCountry: originCountry,
+          properties: properties,
+          assetCategory: assetCategory,
         };
 
-        const addDatasourceConnectionResult =
-          dataVirtualizationService.addDatasourceConnection(params);
+        const addDatasourceConnectionResult = dataVirtualizationService.addDatasourceConnection(params);
 
         // all methods should return a Promise
         expectToBePromise(addDatasourceConnectionResult);
@@ -206,17 +220,32 @@ describe('DataVirtualizationV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/v2/datasource/connections', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/v2/datasource/connections', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body.datasource_type).toEqual(datasourceType);
-        expect(options.body.name).toEqual(name);
-        expect(options.body.origin_country).toEqual(originCountry);
-        expect(options.body.properties).toEqual(properties);
-        expect(options.body.asset_category).toEqual(assetCategory);
+        expect(mockRequestOptions.body.datasource_type).toEqual(datasourceType);
+        expect(mockRequestOptions.body.name).toEqual(name);
+        expect(mockRequestOptions.body.origin_country).toEqual(originCountry);
+        expect(mockRequestOptions.body.properties).toEqual(properties);
+        expect(mockRequestOptions.body.asset_category).toEqual(assetCategory);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __addDatasourceConnectionTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.enableRetries();
+        __addDatasourceConnectionTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.disableRetries();
+        __addDatasourceConnectionTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -244,7 +273,7 @@ describe('DataVirtualizationV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await dataVirtualizationService.addDatasourceConnection({});
@@ -253,33 +282,32 @@ describe('DataVirtualizationV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const addDatasourceConnectionPromise = dataVirtualizationService.addDatasourceConnection();
-        expectToBePromise(addDatasourceConnectionPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await dataVirtualizationService.addDatasourceConnection();
+        } catch (e) {
+          err = e;
+        }
 
-        addDatasourceConnectionPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
   describe('deleteDatasourceConnection', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __deleteDatasourceConnectionTest() {
         // Construct the params object for operation deleteDatasourceConnection
         const connectionId = '75e4d01b-7417-4abc-b267-8ffb393fb970';
         const cid = 'DB210013';
         const params = {
-          connectionId,
-          cid,
+          connectionId: connectionId,
+          cid: cid,
         };
 
-        const deleteDatasourceConnectionResult =
-          dataVirtualizationService.deleteDatasourceConnection(params);
+        const deleteDatasourceConnectionResult = dataVirtualizationService.deleteDatasourceConnection(params);
 
         // all methods should return a Promise
         expectToBePromise(deleteDatasourceConnectionResult);
@@ -287,14 +315,29 @@ describe('DataVirtualizationV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/v2/datasource/connections/{connection_id}', 'DELETE');
+        checkUrlAndMethod(mockRequestOptions, '/v2/datasource/connections/{connection_id}', 'DELETE');
         const expectedAccept = undefined;
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.qs.cid).toEqual(cid);
-        expect(options.path.connection_id).toEqual(connectionId);
+        expect(mockRequestOptions.qs.cid).toEqual(cid);
+        expect(mockRequestOptions.path.connection_id).toEqual(connectionId);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __deleteDatasourceConnectionTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.enableRetries();
+        __deleteDatasourceConnectionTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.disableRetries();
+        __deleteDatasourceConnectionTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -316,7 +359,7 @@ describe('DataVirtualizationV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await dataVirtualizationService.deleteDatasourceConnection({});
@@ -325,36 +368,97 @@ describe('DataVirtualizationV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const deleteDatasourceConnectionPromise =
-          dataVirtualizationService.deleteDatasourceConnection();
-        expectToBePromise(deleteDatasourceConnectionPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await dataVirtualizationService.deleteDatasourceConnection();
+        } catch (e) {
+          err = e;
+        }
 
-        deleteDatasourceConnectionPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
+      });
+    });
+  });
+  describe('getObjectStoreConnectionsV2', () => {
+    describe('positive tests', () => {
+      function __getObjectStoreConnectionsV2Test() {
+        // Construct the params object for operation getObjectStoreConnectionsV2
+        const jwtAuthUserPayload = 'testString';
+        const params = {
+          jwtAuthUserPayload: jwtAuthUserPayload,
+        };
+
+        const getObjectStoreConnectionsV2Result = dataVirtualizationService.getObjectStoreConnectionsV2(params);
+
+        // all methods should return a Promise
+        expectToBePromise(getObjectStoreConnectionsV2Result);
+
+        // assert that create request was called
+        expect(createRequestMock).toHaveBeenCalledTimes(1);
+
+        const mockRequestOptions = getOptions(createRequestMock);
+
+        checkUrlAndMethod(mockRequestOptions, '/v2/datasource/objectstore_connections', 'GET');
+        const expectedAccept = 'application/json';
+        const expectedContentType = undefined;
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+        checkUserHeader(createRequestMock, 'jwt-auth-user-payload', jwtAuthUserPayload);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getObjectStoreConnectionsV2Test();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.enableRetries();
+        __getObjectStoreConnectionsV2Test();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.disableRetries();
+        __getObjectStoreConnectionsV2Test();
+      });
+
+      test('should prioritize user-given headers', () => {
+        // parameters
+        const userAccept = 'fake/accept';
+        const userContentType = 'fake/contentType';
+        const params = {
+          headers: {
+            Accept: userAccept,
+            'Content-Type': userContentType,
+          },
+        };
+
+        dataVirtualizationService.getObjectStoreConnectionsV2(params);
+        checkMediaHeaders(createRequestMock, userAccept, userContentType);
+      });
+
+      test('should not have any problems when no parameters are passed in', () => {
+        // invoke the method with no parameters
+        dataVirtualizationService.getObjectStoreConnectionsV2({});
+        checkForSuccessfulExecution(createRequestMock);
       });
     });
   });
   describe('grantUserToVirtualTable', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __grantUserToVirtualTableTest() {
         // Construct the params object for operation grantUserToVirtualTable
         const tableName = 'EMPLOYEE';
         const tableSchema = 'dv_ibmid_060000s4y5';
         const authid = 'PUBLIC';
         const params = {
-          tableName,
-          tableSchema,
-          authid,
+          tableName: tableName,
+          tableSchema: tableSchema,
+          authid: authid,
         };
 
-        const grantUserToVirtualTableResult =
-          dataVirtualizationService.grantUserToVirtualTable(params);
+        const grantUserToVirtualTableResult = dataVirtualizationService.grantUserToVirtualTable(params);
 
         // all methods should return a Promise
         expectToBePromise(grantUserToVirtualTableResult);
@@ -362,15 +466,30 @@ describe('DataVirtualizationV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/v2/privileges/users', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/v2/privileges/users', 'POST');
         const expectedAccept = undefined;
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body.table_name).toEqual(tableName);
-        expect(options.body.table_schema).toEqual(tableSchema);
-        expect(options.body.authid).toEqual(authid);
+        expect(mockRequestOptions.body.table_name).toEqual(tableName);
+        expect(mockRequestOptions.body.table_schema).toEqual(tableSchema);
+        expect(mockRequestOptions.body.authid).toEqual(authid);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __grantUserToVirtualTableTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.enableRetries();
+        __grantUserToVirtualTableTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.disableRetries();
+        __grantUserToVirtualTableTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -396,7 +515,7 @@ describe('DataVirtualizationV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await dataVirtualizationService.grantUserToVirtualTable({});
@@ -405,31 +524,31 @@ describe('DataVirtualizationV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const grantUserToVirtualTablePromise = dataVirtualizationService.grantUserToVirtualTable();
-        expectToBePromise(grantUserToVirtualTablePromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await dataVirtualizationService.grantUserToVirtualTable();
+        } catch (e) {
+          err = e;
+        }
 
-        grantUserToVirtualTablePromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
   describe('revokeUserFromObject', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __revokeUserFromObjectTest() {
         // Construct the params object for operation revokeUserFromObject
         const authid = 'PUBLIC';
         const tableName = 'EMPLOYEE';
         const tableSchema = 'dv_ibmid_060000s4y5';
         const params = {
-          authid,
-          tableName,
-          tableSchema,
+          authid: authid,
+          tableName: tableName,
+          tableSchema: tableSchema,
         };
 
         const revokeUserFromObjectResult = dataVirtualizationService.revokeUserFromObject(params);
@@ -440,15 +559,30 @@ describe('DataVirtualizationV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/v2/privileges/users/{authid}', 'DELETE');
+        checkUrlAndMethod(mockRequestOptions, '/v2/privileges/users/{authid}', 'DELETE');
         const expectedAccept = undefined;
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.qs.table_name).toEqual(tableName);
-        expect(options.qs.table_schema).toEqual(tableSchema);
-        expect(options.path.authid).toEqual(authid);
+        expect(mockRequestOptions.qs.table_name).toEqual(tableName);
+        expect(mockRequestOptions.qs.table_schema).toEqual(tableSchema);
+        expect(mockRequestOptions.path.authid).toEqual(authid);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __revokeUserFromObjectTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.enableRetries();
+        __revokeUserFromObjectTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.disableRetries();
+        __revokeUserFromObjectTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -474,7 +608,7 @@ describe('DataVirtualizationV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await dataVirtualizationService.revokeUserFromObject({});
@@ -483,35 +617,34 @@ describe('DataVirtualizationV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const revokeUserFromObjectPromise = dataVirtualizationService.revokeUserFromObject();
-        expectToBePromise(revokeUserFromObjectPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await dataVirtualizationService.revokeUserFromObject();
+        } catch (e) {
+          err = e;
+        }
 
-        revokeUserFromObjectPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
   describe('grantRolesToVirtualizedTable', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __grantRolesToVirtualizedTableTest() {
         // Construct the params object for operation grantRolesToVirtualizedTable
         const tableName = 'EMPLOYEE';
         const tableSchema = 'dv_ibmid_060000s4y5';
         const roleName = 'PUBLIC';
         const params = {
-          tableName,
-          tableSchema,
-          roleName,
+          tableName: tableName,
+          tableSchema: tableSchema,
+          roleName: roleName,
         };
 
-        const grantRolesToVirtualizedTableResult =
-          dataVirtualizationService.grantRolesToVirtualizedTable(params);
+        const grantRolesToVirtualizedTableResult = dataVirtualizationService.grantRolesToVirtualizedTable(params);
 
         // all methods should return a Promise
         expectToBePromise(grantRolesToVirtualizedTableResult);
@@ -519,15 +652,30 @@ describe('DataVirtualizationV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/v2/privileges/roles', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/v2/privileges/roles', 'POST');
         const expectedAccept = undefined;
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body.table_name).toEqual(tableName);
-        expect(options.body.table_schema).toEqual(tableSchema);
-        expect(options.body.role_name).toEqual(roleName);
+        expect(mockRequestOptions.body.table_name).toEqual(tableName);
+        expect(mockRequestOptions.body.table_schema).toEqual(tableSchema);
+        expect(mockRequestOptions.body.role_name).toEqual(roleName);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __grantRolesToVirtualizedTableTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.enableRetries();
+        __grantRolesToVirtualizedTableTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.disableRetries();
+        __grantRolesToVirtualizedTableTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -551,7 +699,7 @@ describe('DataVirtualizationV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await dataVirtualizationService.grantRolesToVirtualizedTable({});
@@ -560,36 +708,34 @@ describe('DataVirtualizationV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const grantRolesToVirtualizedTablePromise =
-          dataVirtualizationService.grantRolesToVirtualizedTable();
-        expectToBePromise(grantRolesToVirtualizedTablePromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await dataVirtualizationService.grantRolesToVirtualizedTable();
+        } catch (e) {
+          err = e;
+        }
 
-        grantRolesToVirtualizedTablePromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
   describe('dvaasRevokeRoleFromTable', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __dvaasRevokeRoleFromTableTest() {
         // Construct the params object for operation dvaasRevokeRoleFromTable
         const roleName = 'DV_ENGINEER';
         const tableName = 'EMPLOYEE';
         const tableSchema = 'dv_ibmid_060000s4y5';
         const params = {
-          roleName,
-          tableName,
-          tableSchema,
+          roleName: roleName,
+          tableName: tableName,
+          tableSchema: tableSchema,
         };
 
-        const dvaasRevokeRoleFromTableResult =
-          dataVirtualizationService.dvaasRevokeRoleFromTable(params);
+        const dvaasRevokeRoleFromTableResult = dataVirtualizationService.dvaasRevokeRoleFromTable(params);
 
         // all methods should return a Promise
         expectToBePromise(dvaasRevokeRoleFromTableResult);
@@ -597,15 +743,30 @@ describe('DataVirtualizationV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/v2/privileges/roles/{role_name}', 'DELETE');
+        checkUrlAndMethod(mockRequestOptions, '/v2/privileges/roles/{role_name}', 'DELETE');
         const expectedAccept = undefined;
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.qs.table_name).toEqual(tableName);
-        expect(options.qs.table_schema).toEqual(tableSchema);
-        expect(options.path.role_name).toEqual(roleName);
+        expect(mockRequestOptions.qs.table_name).toEqual(tableName);
+        expect(mockRequestOptions.qs.table_schema).toEqual(tableSchema);
+        expect(mockRequestOptions.path.role_name).toEqual(roleName);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __dvaasRevokeRoleFromTableTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.enableRetries();
+        __dvaasRevokeRoleFromTableTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.disableRetries();
+        __dvaasRevokeRoleFromTableTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -631,7 +792,7 @@ describe('DataVirtualizationV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await dataVirtualizationService.dvaasRevokeRoleFromTable({});
@@ -640,28 +801,27 @@ describe('DataVirtualizationV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const dvaasRevokeRoleFromTablePromise =
-          dataVirtualizationService.dvaasRevokeRoleFromTable();
-        expectToBePromise(dvaasRevokeRoleFromTablePromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await dataVirtualizationService.dvaasRevokeRoleFromTable();
+        } catch (e) {
+          err = e;
+        }
 
-        dvaasRevokeRoleFromTablePromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
   describe('listTablesForRole', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __listTablesForRoleTest() {
         // Construct the params object for operation listTablesForRole
         const rolename = 'MANAGER | STEWARD | ENGINEER | USER';
         const params = {
-          rolename,
+          rolename: rolename,
         };
 
         const listTablesForRoleResult = dataVirtualizationService.listTablesForRole(params);
@@ -672,13 +832,28 @@ describe('DataVirtualizationV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/v2/privileges/tables', 'GET');
+        checkUrlAndMethod(mockRequestOptions, '/v2/privileges/tables', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.qs.rolename).toEqual(rolename);
+        expect(mockRequestOptions.qs.rolename).toEqual(rolename);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __listTablesForRoleTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.enableRetries();
+        __listTablesForRoleTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.disableRetries();
+        __listTablesForRoleTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -700,7 +875,7 @@ describe('DataVirtualizationV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await dataVirtualizationService.listTablesForRole({});
@@ -709,27 +884,27 @@ describe('DataVirtualizationV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const listTablesForRolePromise = dataVirtualizationService.listTablesForRole();
-        expectToBePromise(listTablesForRolePromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await dataVirtualizationService.listTablesForRole();
+        } catch (e) {
+          err = e;
+        }
 
-        listTablesForRolePromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
   describe('turnOnPolicyV2', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __turnOnPolicyV2Test() {
         // Construct the params object for operation turnOnPolicyV2
         const status = 'enabled';
         const params = {
-          status,
+          status: status,
         };
 
         const turnOnPolicyV2Result = dataVirtualizationService.turnOnPolicyV2(params);
@@ -740,13 +915,28 @@ describe('DataVirtualizationV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/v2/security/policy/status', 'PUT');
+        checkUrlAndMethod(mockRequestOptions, '/v2/security/policy/status', 'PUT');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.qs.status).toEqual(status);
+        expect(mockRequestOptions.qs.status).toEqual(status);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __turnOnPolicyV2Test();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.enableRetries();
+        __turnOnPolicyV2Test();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.disableRetries();
+        __turnOnPolicyV2Test();
       });
 
       test('should prioritize user-given headers', () => {
@@ -768,7 +958,7 @@ describe('DataVirtualizationV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await dataVirtualizationService.turnOnPolicyV2({});
@@ -777,23 +967,23 @@ describe('DataVirtualizationV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const turnOnPolicyV2Promise = dataVirtualizationService.turnOnPolicyV2();
-        expectToBePromise(turnOnPolicyV2Promise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await dataVirtualizationService.turnOnPolicyV2();
+        } catch (e) {
+          err = e;
+        }
 
-        turnOnPolicyV2Promise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
   describe('checkPolicyStatusV2', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __checkPolicyStatusV2Test() {
         // Construct the params object for operation checkPolicyStatusV2
         const params = {};
 
@@ -805,12 +995,27 @@ describe('DataVirtualizationV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/v2/security/policy/status', 'GET');
+        checkUrlAndMethod(mockRequestOptions, '/v2/security/policy/status', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __checkPolicyStatusV2Test();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.enableRetries();
+        __checkPolicyStatusV2Test();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.disableRetries();
+        __checkPolicyStatusV2Test();
       });
 
       test('should prioritize user-given headers', () => {
@@ -851,7 +1056,7 @@ describe('DataVirtualizationV1', () => {
         column_type: 'INTEGER',
       };
 
-      test('should pass the right params to createRequest', () => {
+      function __dvaasVirtualizeTableTest() {
         // Construct the params object for operation dvaasVirtualizeTable
         const sourceName = 'Tab1';
         const sourceTableDef = [virtualizeTableParameterSourceTableDefItemModel];
@@ -862,14 +1067,14 @@ describe('DataVirtualizationV1', () => {
         const isIncludedColumns = 'Y, Y, N';
         const replace = false;
         const params = {
-          sourceName,
-          sourceTableDef,
-          sources,
-          virtualName,
-          virtualSchema,
-          virtualTableDef,
-          isIncludedColumns,
-          replace,
+          sourceName: sourceName,
+          sourceTableDef: sourceTableDef,
+          sources: sources,
+          virtualName: virtualName,
+          virtualSchema: virtualSchema,
+          virtualTableDef: virtualTableDef,
+          isIncludedColumns: isIncludedColumns,
+          replace: replace,
         };
 
         const dvaasVirtualizeTableResult = dataVirtualizationService.dvaasVirtualizeTable(params);
@@ -880,20 +1085,35 @@ describe('DataVirtualizationV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/v2/virtualization/tables', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/v2/virtualization/tables', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body.source_name).toEqual(sourceName);
-        expect(options.body.source_table_def).toEqual(sourceTableDef);
-        expect(options.body.sources).toEqual(sources);
-        expect(options.body.virtual_name).toEqual(virtualName);
-        expect(options.body.virtual_schema).toEqual(virtualSchema);
-        expect(options.body.virtual_table_def).toEqual(virtualTableDef);
-        expect(options.body.is_included_columns).toEqual(isIncludedColumns);
-        expect(options.body.replace).toEqual(replace);
+        expect(mockRequestOptions.body.source_name).toEqual(sourceName);
+        expect(mockRequestOptions.body.source_table_def).toEqual(sourceTableDef);
+        expect(mockRequestOptions.body.sources).toEqual(sources);
+        expect(mockRequestOptions.body.virtual_name).toEqual(virtualName);
+        expect(mockRequestOptions.body.virtual_schema).toEqual(virtualSchema);
+        expect(mockRequestOptions.body.virtual_table_def).toEqual(virtualTableDef);
+        expect(mockRequestOptions.body.is_included_columns).toEqual(isIncludedColumns);
+        expect(mockRequestOptions.body.replace).toEqual(replace);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __dvaasVirtualizeTableTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.enableRetries();
+        __dvaasVirtualizeTableTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.disableRetries();
+        __dvaasVirtualizeTableTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -925,7 +1145,7 @@ describe('DataVirtualizationV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await dataVirtualizationService.dvaasVirtualizeTable({});
@@ -934,29 +1154,29 @@ describe('DataVirtualizationV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const dvaasVirtualizeTablePromise = dataVirtualizationService.dvaasVirtualizeTable();
-        expectToBePromise(dvaasVirtualizeTablePromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await dataVirtualizationService.dvaasVirtualizeTable();
+        } catch (e) {
+          err = e;
+        }
 
-        dvaasVirtualizeTablePromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
   describe('deleteTable', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __deleteTableTest() {
         // Construct the params object for operation deleteTable
         const virtualSchema = 'testString';
         const virtualName = 'testString';
         const params = {
-          virtualSchema,
-          virtualName,
+          virtualSchema: virtualSchema,
+          virtualName: virtualName,
         };
 
         const deleteTableResult = dataVirtualizationService.deleteTable(params);
@@ -967,14 +1187,29 @@ describe('DataVirtualizationV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/v2/virtualization/tables/{virtual_name}', 'DELETE');
+        checkUrlAndMethod(mockRequestOptions, '/v2/virtualization/tables/{virtual_name}', 'DELETE');
         const expectedAccept = undefined;
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.qs.virtual_schema).toEqual(virtualSchema);
-        expect(options.path.virtual_name).toEqual(virtualName);
+        expect(mockRequestOptions.qs.virtual_schema).toEqual(virtualSchema);
+        expect(mockRequestOptions.path.virtual_name).toEqual(virtualName);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __deleteTableTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.enableRetries();
+        __deleteTableTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.disableRetries();
+        __deleteTableTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -998,7 +1233,7 @@ describe('DataVirtualizationV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await dataVirtualizationService.deleteTable({});
@@ -1007,23 +1242,138 @@ describe('DataVirtualizationV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const deleteTablePromise = dataVirtualizationService.deleteTable();
-        expectToBePromise(deleteTablePromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await dataVirtualizationService.deleteTable();
+        } catch (e) {
+          err = e;
+        }
 
-        deleteTablePromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
+      });
+    });
+  });
+  describe('virtualizeCosV2', () => {
+    describe('positive tests', () => {
+      // Request models needed by this operation.
+
+      // VirtualizeCosV2RequestVirtualTableDefItem
+      const virtualizeCosV2RequestVirtualTableDefItemModel = {
+        column_name: 'Column_1',
+        column_type: 'INTEGER',
+      };
+
+      function __virtualizeCosV2Test() {
+        // Construct the params object for operation virtualizeCosV2
+        const url = 's3a://testBucket/home/data.csv';
+        const virtualName = 'testString';
+        const virtualSchema = 'testString';
+        const virtualTableDef = [virtualizeCosV2RequestVirtualTableDefItemModel];
+        const isReplace = false;
+        const options = 'INCPARTS=true';
+        const jwtAuthUserPayload = 'testString';
+        const params = {
+          url: url,
+          virtualName: virtualName,
+          virtualSchema: virtualSchema,
+          virtualTableDef: virtualTableDef,
+          isReplace: isReplace,
+          options: options,
+          jwtAuthUserPayload: jwtAuthUserPayload,
+        };
+
+        const virtualizeCosV2Result = dataVirtualizationService.virtualizeCosV2(params);
+
+        // all methods should return a Promise
+        expectToBePromise(virtualizeCosV2Result);
+
+        // assert that create request was called
+        expect(createRequestMock).toHaveBeenCalledTimes(1);
+
+        const mockRequestOptions = getOptions(createRequestMock);
+
+        checkUrlAndMethod(mockRequestOptions, '/v2/virtualization/cloud_object_storages', 'POST');
+        const expectedAccept = 'application/json';
+        const expectedContentType = 'application/json';
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+        checkUserHeader(createRequestMock, 'jwt-auth-user-payload', jwtAuthUserPayload);
+        expect(mockRequestOptions.body.url).toEqual(url);
+        expect(mockRequestOptions.body.virtual_name).toEqual(virtualName);
+        expect(mockRequestOptions.body.virtual_schema).toEqual(virtualSchema);
+        expect(mockRequestOptions.body.virtual_table_def).toEqual(virtualTableDef);
+        expect(mockRequestOptions.body.is_replace).toEqual(isReplace);
+        expect(mockRequestOptions.body.options).toEqual(options);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __virtualizeCosV2Test();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.enableRetries();
+        __virtualizeCosV2Test();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.disableRetries();
+        __virtualizeCosV2Test();
+      });
+
+      test('should prioritize user-given headers', () => {
+        // parameters
+        const url = 's3a://testBucket/home/data.csv';
+        const virtualName = 'testString';
+        const virtualSchema = 'testString';
+        const virtualTableDef = [virtualizeCosV2RequestVirtualTableDefItemModel];
+        const userAccept = 'fake/accept';
+        const userContentType = 'fake/contentType';
+        const params = {
+          url,
+          virtualName,
+          virtualSchema,
+          virtualTableDef,
+          headers: {
+            Accept: userAccept,
+            'Content-Type': userContentType,
+          },
+        };
+
+        dataVirtualizationService.virtualizeCosV2(params);
+        checkMediaHeaders(createRequestMock, userAccept, userContentType);
+      });
+    });
+
+    describe('negative tests', () => {
+      test('should enforce required parameters', async () => {
+        let err;
+        try {
+          await dataVirtualizationService.virtualizeCosV2({});
+        } catch (e) {
+          err = e;
+        }
+
+        expect(err.message).toMatch(/Missing required parameters/);
+      });
+
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await dataVirtualizationService.virtualizeCosV2();
+        } catch (e) {
+          err = e;
+        }
+
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
   describe('getPrimaryCatalog', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __getPrimaryCatalogTest() {
         // Construct the params object for operation getPrimaryCatalog
         const params = {};
 
@@ -1035,12 +1385,27 @@ describe('DataVirtualizationV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/v2/catalog/primary', 'GET');
+        checkUrlAndMethod(mockRequestOptions, '/v2/catalog/primary', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getPrimaryCatalogTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.enableRetries();
+        __getPrimaryCatalogTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.disableRetries();
+        __getPrimaryCatalogTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -1067,11 +1432,11 @@ describe('DataVirtualizationV1', () => {
   });
   describe('postPrimaryCatalog', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __postPrimaryCatalogTest() {
         // Construct the params object for operation postPrimaryCatalog
         const guid = 'd77fc432-9b1a-4938-a2a5-9f37e08041f6';
         const params = {
-          guid,
+          guid: guid,
         };
 
         const postPrimaryCatalogResult = dataVirtualizationService.postPrimaryCatalog(params);
@@ -1082,13 +1447,28 @@ describe('DataVirtualizationV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/v2/catalog/primary', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/v2/catalog/primary', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body.guid).toEqual(guid);
+        expect(mockRequestOptions.body.guid).toEqual(guid);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __postPrimaryCatalogTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.enableRetries();
+        __postPrimaryCatalogTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.disableRetries();
+        __postPrimaryCatalogTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -1110,7 +1490,7 @@ describe('DataVirtualizationV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await dataVirtualizationService.postPrimaryCatalog({});
@@ -1119,27 +1499,27 @@ describe('DataVirtualizationV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const postPrimaryCatalogPromise = dataVirtualizationService.postPrimaryCatalog();
-        expectToBePromise(postPrimaryCatalogPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await dataVirtualizationService.postPrimaryCatalog();
+        } catch (e) {
+          err = e;
+        }
 
-        postPrimaryCatalogPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
   describe('deletePrimaryCatalog', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __deletePrimaryCatalogTest() {
         // Construct the params object for operation deletePrimaryCatalog
         const guid = 'd77fc432-9b1a-4938-a2a5-9f37e08041f6';
         const params = {
-          guid,
+          guid: guid,
         };
 
         const deletePrimaryCatalogResult = dataVirtualizationService.deletePrimaryCatalog(params);
@@ -1150,13 +1530,28 @@ describe('DataVirtualizationV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/v2/catalog/primary', 'DELETE');
+        checkUrlAndMethod(mockRequestOptions, '/v2/catalog/primary', 'DELETE');
         const expectedAccept = undefined;
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.qs.guid).toEqual(guid);
+        expect(mockRequestOptions.qs.guid).toEqual(guid);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __deletePrimaryCatalogTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.enableRetries();
+        __deletePrimaryCatalogTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.disableRetries();
+        __deletePrimaryCatalogTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -1178,7 +1573,7 @@ describe('DataVirtualizationV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await dataVirtualizationService.deletePrimaryCatalog({});
@@ -1187,17 +1582,17 @@ describe('DataVirtualizationV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const deletePrimaryCatalogPromise = dataVirtualizationService.deletePrimaryCatalog();
-        expectToBePromise(deletePrimaryCatalogPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await dataVirtualizationService.deletePrimaryCatalog();
+        } catch (e) {
+          err = e;
+        }
 
-        deletePrimaryCatalogPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -1211,15 +1606,15 @@ describe('DataVirtualizationV1', () => {
         table: 'EMPLOYEE',
       };
 
-      test('should pass the right params to createRequest', () => {
+      function __publishAssetsTest() {
         // Construct the params object for operation publishAssets
         const catalogId = '2b6b9fc5-626c-47a9-a836-56b76c0bc826';
         const allowDuplicates = false;
         const assets = [postPrimaryCatalogParametersAssetsItemModel];
         const params = {
-          catalogId,
-          allowDuplicates,
-          assets,
+          catalogId: catalogId,
+          allowDuplicates: allowDuplicates,
+          assets: assets,
         };
 
         const publishAssetsResult = dataVirtualizationService.publishAssets(params);
@@ -1230,15 +1625,30 @@ describe('DataVirtualizationV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/v2/integration/catalog/publish', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/v2/integration/catalog/publish', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body.catalog_id).toEqual(catalogId);
-        expect(options.body.allow_duplicates).toEqual(allowDuplicates);
-        expect(options.body.assets).toEqual(assets);
+        expect(mockRequestOptions.body.catalog_id).toEqual(catalogId);
+        expect(mockRequestOptions.body.allow_duplicates).toEqual(allowDuplicates);
+        expect(mockRequestOptions.body.assets).toEqual(assets);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __publishAssetsTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.enableRetries();
+        __publishAssetsTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.disableRetries();
+        __publishAssetsTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -1264,7 +1674,7 @@ describe('DataVirtualizationV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await dataVirtualizationService.publishAssets({});
@@ -1273,17 +1683,218 @@ describe('DataVirtualizationV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const publishAssetsPromise = dataVirtualizationService.publishAssets();
-        expectToBePromise(publishAssetsPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await dataVirtualizationService.publishAssets();
+        } catch (e) {
+          err = e;
+        }
 
-        publishAssetsPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
+      });
+    });
+  });
+  describe('getCachesList', () => {
+    describe('positive tests', () => {
+      function __getCachesListTest() {
+        // Construct the params object for operation getCachesList
+        const params = {};
+
+        const getCachesListResult = dataVirtualizationService.getCachesList(params);
+
+        // all methods should return a Promise
+        expectToBePromise(getCachesListResult);
+
+        // assert that create request was called
+        expect(createRequestMock).toHaveBeenCalledTimes(1);
+
+        const mockRequestOptions = getOptions(createRequestMock);
+
+        checkUrlAndMethod(mockRequestOptions, '/v1/caching/caches', 'GET');
+        const expectedAccept = 'application/json';
+        const expectedContentType = undefined;
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getCachesListTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.enableRetries();
+        __getCachesListTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.disableRetries();
+        __getCachesListTest();
+      });
+
+      test('should prioritize user-given headers', () => {
+        // parameters
+        const userAccept = 'fake/accept';
+        const userContentType = 'fake/contentType';
+        const params = {
+          headers: {
+            Accept: userAccept,
+            'Content-Type': userContentType,
+          },
+        };
+
+        dataVirtualizationService.getCachesList(params);
+        checkMediaHeaders(createRequestMock, userAccept, userContentType);
+      });
+
+      test('should not have any problems when no parameters are passed in', () => {
+        // invoke the method with no parameters
+        dataVirtualizationService.getCachesList({});
+        checkForSuccessfulExecution(createRequestMock);
+      });
+    });
+  });
+  describe('getCache', () => {
+    describe('positive tests', () => {
+      function __getCacheTest() {
+        // Construct the params object for operation getCache
+        const id = 'DV20210810191252390327';
+        const params = {
+          id: id,
+        };
+
+        const getCacheResult = dataVirtualizationService.getCache(params);
+
+        // all methods should return a Promise
+        expectToBePromise(getCacheResult);
+
+        // assert that create request was called
+        expect(createRequestMock).toHaveBeenCalledTimes(1);
+
+        const mockRequestOptions = getOptions(createRequestMock);
+
+        checkUrlAndMethod(mockRequestOptions, '/v1/caching/caches/{id}', 'GET');
+        const expectedAccept = 'application/json';
+        const expectedContentType = undefined;
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+        expect(mockRequestOptions.path.id).toEqual(id);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getCacheTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.enableRetries();
+        __getCacheTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.disableRetries();
+        __getCacheTest();
+      });
+
+      test('should prioritize user-given headers', () => {
+        // parameters
+        const id = 'DV20210810191252390327';
+        const userAccept = 'fake/accept';
+        const userContentType = 'fake/contentType';
+        const params = {
+          id,
+          headers: {
+            Accept: userAccept,
+            'Content-Type': userContentType,
+          },
+        };
+
+        dataVirtualizationService.getCache(params);
+        checkMediaHeaders(createRequestMock, userAccept, userContentType);
+      });
+    });
+
+    describe('negative tests', () => {
+      test('should enforce required parameters', async () => {
+        let err;
+        try {
+          await dataVirtualizationService.getCache({});
+        } catch (e) {
+          err = e;
+        }
+
+        expect(err.message).toMatch(/Missing required parameters/);
+      });
+
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await dataVirtualizationService.getCache();
+        } catch (e) {
+          err = e;
+        }
+
+        expect(err.message).toMatch(/Missing required parameters/);
+      });
+    });
+  });
+  describe('getCacheStorageDetail', () => {
+    describe('positive tests', () => {
+      function __getCacheStorageDetailTest() {
+        // Construct the params object for operation getCacheStorageDetail
+        const params = {};
+
+        const getCacheStorageDetailResult = dataVirtualizationService.getCacheStorageDetail(params);
+
+        // all methods should return a Promise
+        expectToBePromise(getCacheStorageDetailResult);
+
+        // assert that create request was called
+        expect(createRequestMock).toHaveBeenCalledTimes(1);
+
+        const mockRequestOptions = getOptions(createRequestMock);
+
+        checkUrlAndMethod(mockRequestOptions, '/v1/caching/storage', 'GET');
+        const expectedAccept = 'application/json';
+        const expectedContentType = undefined;
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getCacheStorageDetailTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.enableRetries();
+        __getCacheStorageDetailTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        dataVirtualizationService.disableRetries();
+        __getCacheStorageDetailTest();
+      });
+
+      test('should prioritize user-given headers', () => {
+        // parameters
+        const userAccept = 'fake/accept';
+        const userContentType = 'fake/contentType';
+        const params = {
+          headers: {
+            Accept: userAccept,
+            'Content-Type': userContentType,
+          },
+        };
+
+        dataVirtualizationService.getCacheStorageDetail(params);
+        checkMediaHeaders(createRequestMock, userAccept, userContentType);
+      });
+
+      test('should not have any problems when no parameters are passed in', () => {
+        // invoke the method with no parameters
+        dataVirtualizationService.getCacheStorageDetail({});
+        checkForSuccessfulExecution(createRequestMock);
       });
     });
   });

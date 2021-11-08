@@ -1124,7 +1124,9 @@ class DataVirtualizationV1 extends BaseService {
     };
 
     const sdkHeaders = getSdkHeaders(
-      DataVirtualizationV1.DEFAULT_SERVICE_NAME,'v1','getCache'
+      DataVirtualizationV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'getCache'
     );
 
     const parameters = {

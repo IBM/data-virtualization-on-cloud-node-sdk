@@ -16,8 +16,8 @@
 
 /* eslint-disable no-console */
 
-const DataVirtualizationV1 = require('../../dist/data-virtualization/v1');
 const { readExternalSources } = require('ibm-cloud-sdk-core');
+const DataVirtualizationV1 = require('../../dist/data-virtualization/v1');
 const authHelper = require('../resources/auth-helper.js');
 
 // testcase timeout value (200s).

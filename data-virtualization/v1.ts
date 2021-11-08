@@ -238,13 +238,7 @@ class DataVirtualizationV1 extends BaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-          },
-          _params.headers
-        ),
+        headers: extend(true, sdkHeaders, {}, _params.headers),
       }),
     };
 
@@ -398,13 +392,7 @@ class DataVirtualizationV1 extends BaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-          },
-          _params.headers
-        ),
+        headers: extend(true, sdkHeaders, {}, _params.headers),
       }),
     };
 
@@ -518,13 +506,7 @@ class DataVirtualizationV1 extends BaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-          },
-          _params.headers
-        ),
+        headers: extend(true, sdkHeaders, {}, _params.headers),
       }),
     };
 
@@ -703,8 +685,14 @@ class DataVirtualizationV1 extends BaseService {
     params: DataVirtualizationV1.DvaasVirtualizeTableParams
   ): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.VirtualizeTableResponse>> {
     const _params = { ...params };
-    const requiredParams = ['sourceName', 'sourceTableDef', 'sources', 'virtualName', 'virtualSchema', 'virtualTableDef'];
-
+    const requiredParams = [
+      'sourceName',
+      'sourceTableDef',
+      'sources',
+      'virtualName',
+      'virtualSchema',
+      'virtualTableDef',
+    ];
     const missingParams = getMissingParams(_params, requiredParams);
     if (missingParams) {
       return Promise.reject(missingParams);
@@ -793,13 +781,7 @@ class DataVirtualizationV1 extends BaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-          },
-          _params.headers
-        ),
+        headers: extend(true, sdkHeaders, {}, _params.headers),
       }),
     };
 
@@ -1006,13 +988,7 @@ class DataVirtualizationV1 extends BaseService {
         qs: query,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-          },
-          _params.headers
-        ),
+        headers: extend(true, sdkHeaders, {}, _params.headers),
       }),
     };
 
@@ -1148,9 +1124,7 @@ class DataVirtualizationV1 extends BaseService {
     };
 
     const sdkHeaders = getSdkHeaders(
-      DataVirtualizationV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getCache'
+      DataVirtualizationV1.DEFAULT_SERVICE_NAME,'v1','getCache'
     );
 
     const parameters = {

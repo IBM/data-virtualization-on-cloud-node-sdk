@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /**
  * (C) Copyright IBM Corp. 2021.
  *
@@ -15,7 +14,8 @@
  * limitations under the License.
  */
 
-'use strict';
+/* eslint-disable no-console */
+
 const DataVirtualizationV1 = require('../../dist/data-virtualization/v1');
 const { readExternalSources } = require('ibm-cloud-sdk-core');
 const authHelper = require('../resources/auth-helper.js');
@@ -29,19 +29,35 @@ const configFile = 'data_virtualization_v1.env';
 const describe = authHelper.prepareTests(configFile);
 
 describe('DataVirtualizationV1_integration', () => {
-  const dataVirtualizationService = DataVirtualizationV1.newInstance({});
-
-  let config = readExternalSources(DataVirtualizationV1.DEFAULT_SERVICE_NAME);
-
-  expect(dataVirtualizationService).not.toBeNull();
-  expect(config).not.toBeNull();
-
   jest.setTimeout(timeout);
+
+  let dataVirtualizationService;
+
+  test('Initialise service', async() => {
+    dataVirtualizationService = DataVirtualizationV1.newInstance({});
+
+    expect(dataVirtualizationService).not.toBeNull();
+
+    const config = readExternalSources(DataVirtualizationV1.DEFAULT_SERVICE_NAME);
+    expect(config).not.toBeNull();
+  
+    dataVirtualizationService.enableRetries();
+  });
 
   test('listDatasourceConnections()', async () => {
     const res = await dataVirtualizationService.listDatasourceConnections();
     expect(res).toBeDefined();
+    expect(res.status).toBe(200);
     expect(res.result).toBeDefined();
+
+    //
+    // The following status codes aren't covered by tests.
+    // Please provide integration tests for these too.
+    //
+    // 400
+    // 401
+    // 500
+    //
   });
   test('addDatasourceConnection()', async () => {
     // Request models needed by this operation.
@@ -90,7 +106,18 @@ describe('DataVirtualizationV1_integration', () => {
 
     const res = await dataVirtualizationService.addDatasourceConnection(params);
     expect(res).toBeDefined();
+    expect(res.status).toBe(201);
     expect(res.result).toBeDefined();
+
+    //
+    // The following status codes aren't covered by tests.
+    // Please provide integration tests for these too.
+    //
+    // 400
+    // 401
+    // 409
+    // 500
+    //
   });
   test('getObjectStoreConnectionsV2()', async () => {
     const params = {
@@ -99,7 +126,17 @@ describe('DataVirtualizationV1_integration', () => {
 
     const res = await dataVirtualizationService.getObjectStoreConnectionsV2(params);
     expect(res).toBeDefined();
+    expect(res.status).toBe(200);
     expect(res.result).toBeDefined();
+
+    //
+    // The following status codes aren't covered by tests.
+    // Please provide integration tests for these too.
+    //
+    // 400
+    // 401
+    // 500
+    //
   });
   test('grantUserToVirtualTable()', async () => {
     const params = {
@@ -110,7 +147,17 @@ describe('DataVirtualizationV1_integration', () => {
 
     const res = await dataVirtualizationService.grantUserToVirtualTable(params);
     expect(res).toBeDefined();
+    expect(res.status).toBe(204);
     expect(res.result).toBeDefined();
+
+    //
+    // The following status codes aren't covered by tests.
+    // Please provide integration tests for these too.
+    //
+    // 400
+    // 401
+    // 500
+    //
   });
   test('grantRolesToVirtualizedTable()', async () => {
     const params = {
@@ -121,7 +168,17 @@ describe('DataVirtualizationV1_integration', () => {
 
     const res = await dataVirtualizationService.grantRolesToVirtualizedTable(params);
     expect(res).toBeDefined();
+    expect(res.status).toBe(204);
     expect(res.result).toBeDefined();
+
+    //
+    // The following status codes aren't covered by tests.
+    // Please provide integration tests for these too.
+    //
+    // 400
+    // 401
+    // 500
+    //
   });
   test('listTablesForRole()', async () => {
     const params = {
@@ -130,7 +187,17 @@ describe('DataVirtualizationV1_integration', () => {
 
     const res = await dataVirtualizationService.listTablesForRole(params);
     expect(res).toBeDefined();
+    expect(res.status).toBe(200);
     expect(res.result).toBeDefined();
+
+    //
+    // The following status codes aren't covered by tests.
+    // Please provide integration tests for these too.
+    //
+    // 400
+    // 401
+    // 500
+    //
   });
   test('turnOnPolicyV2()', async () => {
     const params = {
@@ -139,12 +206,30 @@ describe('DataVirtualizationV1_integration', () => {
 
     const res = await dataVirtualizationService.turnOnPolicyV2(params);
     expect(res).toBeDefined();
+    expect(res.status).toBe(200);
     expect(res.result).toBeDefined();
+
+    //
+    // The following status codes aren't covered by tests.
+    // Please provide integration tests for these too.
+    //
+    // 401
+    // 500
+    //
   });
   test('checkPolicyStatusV2()', async () => {
     const res = await dataVirtualizationService.checkPolicyStatusV2();
     expect(res).toBeDefined();
+    expect(res.status).toBe(200);
     expect(res.result).toBeDefined();
+
+    //
+    // The following status codes aren't covered by tests.
+    // Please provide integration tests for these too.
+    //
+    // 401
+    // 500
+    //
   });
   test('dvaasVirtualizeTable()', async () => {
     // Request models needed by this operation.
@@ -174,7 +259,17 @@ describe('DataVirtualizationV1_integration', () => {
 
     const res = await dataVirtualizationService.dvaasVirtualizeTable(params);
     expect(res).toBeDefined();
+    expect(res.status).toBe(201);
     expect(res.result).toBeDefined();
+
+    //
+    // The following status codes aren't covered by tests.
+    // Please provide integration tests for these too.
+    //
+    // 400
+    // 401
+    // 500
+    //
   });
   test('virtualizeCosV2()', async () => {
     // Request models needed by this operation.
@@ -190,19 +285,39 @@ describe('DataVirtualizationV1_integration', () => {
       virtualName: 'testString',
       virtualSchema: 'testString',
       virtualTableDef: [virtualizeCosV2RequestVirtualTableDefItemModel],
-      isReplace: true,
+      isReplace: false,
       options: 'INCPARTS=true',
       jwtAuthUserPayload: 'testString',
     };
 
     const res = await dataVirtualizationService.virtualizeCosV2(params);
     expect(res).toBeDefined();
+    expect(res.status).toBe(200);
     expect(res.result).toBeDefined();
+
+    //
+    // The following status codes aren't covered by tests.
+    // Please provide integration tests for these too.
+    //
+    // 400
+    // 401
+    // 500
+    //
   });
   test('getPrimaryCatalog()', async () => {
     const res = await dataVirtualizationService.getPrimaryCatalog();
     expect(res).toBeDefined();
+    expect(res.status).toBe(200);
     expect(res.result).toBeDefined();
+
+    //
+    // The following status codes aren't covered by tests.
+    // Please provide integration tests for these too.
+    //
+    // 400
+    // 401
+    // 500
+    //
   });
   test('postPrimaryCatalog()', async () => {
     const params = {
@@ -211,7 +326,17 @@ describe('DataVirtualizationV1_integration', () => {
 
     const res = await dataVirtualizationService.postPrimaryCatalog(params);
     expect(res).toBeDefined();
+    expect(res.status).toBe(201);
     expect(res.result).toBeDefined();
+
+    //
+    // The following status codes aren't covered by tests.
+    // Please provide integration tests for these too.
+    //
+    // 400
+    // 401
+    // 500
+    //
   });
   test('publishAssets()', async () => {
     // Request models needed by this operation.
@@ -230,12 +355,32 @@ describe('DataVirtualizationV1_integration', () => {
 
     const res = await dataVirtualizationService.publishAssets(params);
     expect(res).toBeDefined();
+    expect(res.status).toBe(200);
     expect(res.result).toBeDefined();
+
+    //
+    // The following status codes aren't covered by tests.
+    // Please provide integration tests for these too.
+    //
+    // 400
+    // 401
+    // 500
+    //
   });
   test('getCachesList()', async () => {
     const res = await dataVirtualizationService.getCachesList();
     expect(res).toBeDefined();
+    expect(res.status).toBe(200);
     expect(res.result).toBeDefined();
+
+    //
+    // The following status codes aren't covered by tests.
+    // Please provide integration tests for these too.
+    //
+    // 400
+    // 401
+    // 500
+    //
   });
   test('getCache()', async () => {
     const params = {
@@ -244,12 +389,32 @@ describe('DataVirtualizationV1_integration', () => {
 
     const res = await dataVirtualizationService.getCache(params);
     expect(res).toBeDefined();
+    expect(res.status).toBe(200);
     expect(res.result).toBeDefined();
+
+    //
+    // The following status codes aren't covered by tests.
+    // Please provide integration tests for these too.
+    //
+    // 400
+    // 401
+    // 500
+    //
   });
   test('getCacheStorageDetail()', async () => {
     const res = await dataVirtualizationService.getCacheStorageDetail();
     expect(res).toBeDefined();
+    expect(res.status).toBe(200);
     expect(res.result).toBeDefined();
+
+    //
+    // The following status codes aren't covered by tests.
+    // Please provide integration tests for these too.
+    //
+    // 400
+    // 401
+    // 500
+    //
   });
   test('revokeUserFromObject()', async () => {
     const params = {
@@ -260,7 +425,17 @@ describe('DataVirtualizationV1_integration', () => {
 
     const res = await dataVirtualizationService.revokeUserFromObject(params);
     expect(res).toBeDefined();
+    expect(res.status).toBe(204);
     expect(res.result).toBeDefined();
+
+    //
+    // The following status codes aren't covered by tests.
+    // Please provide integration tests for these too.
+    //
+    // 400
+    // 401
+    // 500
+    //
   });
   test('dvaasRevokeRoleFromTable()', async () => {
     const params = {
@@ -271,7 +446,17 @@ describe('DataVirtualizationV1_integration', () => {
 
     const res = await dataVirtualizationService.dvaasRevokeRoleFromTable(params);
     expect(res).toBeDefined();
+    expect(res.status).toBe(204);
     expect(res.result).toBeDefined();
+
+    //
+    // The following status codes aren't covered by tests.
+    // Please provide integration tests for these too.
+    //
+    // 400
+    // 401
+    // 500
+    //
   });
   test('deleteTable()', async () => {
     const params = {
@@ -281,7 +466,16 @@ describe('DataVirtualizationV1_integration', () => {
 
     const res = await dataVirtualizationService.deleteTable(params);
     expect(res).toBeDefined();
+    expect(res.status).toBe(204);
     expect(res.result).toBeDefined();
+
+    //
+    // The following status codes aren't covered by tests.
+    // Please provide integration tests for these too.
+    //
+    // 400
+    // 500
+    //
   });
   test('deletePrimaryCatalog()', async () => {
     const params = {
@@ -290,7 +484,17 @@ describe('DataVirtualizationV1_integration', () => {
 
     const res = await dataVirtualizationService.deletePrimaryCatalog(params);
     expect(res).toBeDefined();
+    expect(res.status).toBe(204);
     expect(res.result).toBeDefined();
+
+    //
+    // The following status codes aren't covered by tests.
+    // Please provide integration tests for these too.
+    //
+    // 400
+    // 401
+    // 500
+    //
   });
   test('deleteDatasourceConnection()', async () => {
     const params = {
@@ -300,6 +504,16 @@ describe('DataVirtualizationV1_integration', () => {
 
     const res = await dataVirtualizationService.deleteDatasourceConnection(params);
     expect(res).toBeDefined();
+    expect(res.status).toBe(204);
     expect(res.result).toBeDefined();
+
+    //
+    // The following status codes aren't covered by tests.
+    // Please provide integration tests for these too.
+    //
+    // 400
+    // 401
+    // 500
+    //
   });
 });

@@ -15,7 +15,7 @@
  */
 
 /**
- * IBM OpenAPI SDK Code Generator Version: 3.34.1-ad041667-20210617-195430
+ * IBM OpenAPI SDK Code Generator Version: 3.42.0-8746aaa4-20211102-213344
  */
 
 import * as extend from 'extend';
@@ -32,6 +32,8 @@ import { getSdkHeaders } from '../lib/common';
 /**
  * The Data Virtualization REST API connects to your service, so you can manage your virtual data, data sources, and
  * user roles.
+ *
+ * API Version: 1.6.0
  */
 
 class DataVirtualizationV1 extends BaseService {
@@ -243,6 +245,45 @@ class DataVirtualizationV1 extends BaseService {
     return this.createRequest(parameters);
   }
 
+  /**
+   * Gets object store connection details.
+   *
+   * @param {Object} [params] - The parameters to send to the service.
+   * @param {string} [params.jwtAuthUserPayload] - Supplied by proxy.  Do NOT add your own value.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<DataVirtualizationV1.Response<DataVirtualizationV1.ObjStoreConnectionResponseV2>>}
+   */
+  public getObjectStoreConnectionsV2(
+    params?: DataVirtualizationV1.GetObjectStoreConnectionsV2Params
+  ): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.ObjStoreConnectionResponseV2>> {
+    const _params = { ...params };
+
+    const sdkHeaders = getSdkHeaders(
+      DataVirtualizationV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'getObjectStoreConnectionsV2'
+    );
+
+    const parameters = {
+      options: {
+        url: '/v2/datasource/objectstore_connections',
+        method: 'GET',
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'jwt-auth-user-payload': _params.jwtAuthUserPayload,
+          },
+          _params.headers
+        ),
+      }),
+    };
+
+    return this.createRequest(parameters);
+  }
   /*************************
    * users
    ************************/
@@ -357,7 +398,6 @@ class DataVirtualizationV1 extends BaseService {
 
     return this.createRequest(parameters);
   }
-
   /*************************
    * roles
    ************************/
@@ -525,18 +565,17 @@ class DataVirtualizationV1 extends BaseService {
 
     return this.createRequest(parameters);
   }
-
   /*************************
    * securities
    ************************/
 
   /**
-   * Turn on or off WKC policy enforcement status.
+   * Turn policy enforcement status on or off.
    *
-   * Turn on WKC policy enforcement status.
+   * Turns policy enforcement status on or off.
    *
    * @param {Object} params - The parameters to send to the service.
-   * @param {string} params.status - Set the status of WKC policy.
+   * @param {string} params.status - Set the status of policy enforcement.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DataVirtualizationV1.Response<DataVirtualizationV1.TurnOnPolicyV2Response>>}
    */
@@ -583,9 +622,9 @@ class DataVirtualizationV1 extends BaseService {
   }
 
   /**
-   * Get WKC policy enforcement status.
+   * Get policy enforcement status.
    *
-   * Get WKC policy enforcement status, return enabled or disabled.
+   * Get policy enforcement status, return enabled or disabled.
    *
    * @param {Object} [params] - The parameters to send to the service.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
@@ -621,7 +660,6 @@ class DataVirtualizationV1 extends BaseService {
 
     return this.createRequest(parameters);
   }
-
   /*************************
    * virtualization
    ************************/
@@ -751,6 +789,70 @@ class DataVirtualizationV1 extends BaseService {
     return this.createRequest(parameters);
   }
 
+  /**
+   * Create a remote table for the ORC or Parquet file on a cloud object store (COS).
+   *
+   * Create a remote table for the ORC or Parquet file on a cloud object store (COS).
+   *
+   * @param {Object} params - The parameters to send to the service.
+   * @param {string} params.url - the file path with bucket name.
+   * @param {string} params.virtualName - the virtual table name.
+   * @param {string} params.virtualSchema - the virtual table schema.
+   * @param {VirtualizeCosV2RequestVirtualTableDefItem[]} params.virtualTableDef -
+   * @param {boolean} [params.isReplace] - if repalce the existing one when create the virtual table.
+   * @param {string} [params.options] - the options used to virtualize file.
+   * @param {string} [params.jwtAuthUserPayload] - Supplied by proxy.  Do NOT add your own value.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<DataVirtualizationV1.Response<DataVirtualizationV1.SuccessResponse>>}
+   */
+  public virtualizeCosV2(
+    params: DataVirtualizationV1.VirtualizeCosV2Params
+  ): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.SuccessResponse>> {
+    const _params = { ...params };
+    const requiredParams = ['url', 'virtualName', 'virtualSchema', 'virtualTableDef'];
+
+    const missingParams = getMissingParams(_params, requiredParams);
+    if (missingParams) {
+      return Promise.reject(missingParams);
+    }
+
+    const body = {
+      'url': _params.url,
+      'virtual_name': _params.virtualName,
+      'virtual_schema': _params.virtualSchema,
+      'virtual_table_def': _params.virtualTableDef,
+      'is_replace': _params.isReplace,
+      'options': _params.options,
+    };
+
+    const sdkHeaders = getSdkHeaders(
+      DataVirtualizationV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'virtualizeCosV2'
+    );
+
+    const parameters = {
+      options: {
+        url: '/v2/virtualization/cloud_object_storages',
+        method: 'POST',
+        body,
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'jwt-auth-user-payload': _params.jwtAuthUserPayload,
+          },
+          _params.headers
+        ),
+      }),
+    };
+
+    return this.createRequest(parameters);
+  }
   /*************************
    * primaryCatalog
    ************************/
@@ -758,7 +860,7 @@ class DataVirtualizationV1 extends BaseService {
   /**
    * Get primary catalog ID.
    *
-   * Get primary catalog ID from the table DVSYS.INSTANCE_INFO.
+   * Gets the primary catalog ID from the DVSYS.INSTANCE_INFO table.
    *
    * @param {Object} [params] - The parameters to send to the service.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
@@ -798,7 +900,7 @@ class DataVirtualizationV1 extends BaseService {
   /**
    * Add primary catalog.
    *
-   * Insert primary catalog ID into table DVSYS.INSTANCE_INFO.
+   * Inserts primary catalog ID into table DVSYS.INSTANCE_INFO.
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.guid -
@@ -893,15 +995,14 @@ class DataVirtualizationV1 extends BaseService {
 
     return this.createRequest(parameters);
   }
-
   /*************************
    * publishObjects
    ************************/
 
   /**
-   * publish virtual table to WKC.
+   * Publish virtual tables to a catalog.
    *
-   * publish virtual tables to WKC.
+   * Publishes virtual tables to a catalog.
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.catalogId -
@@ -946,6 +1047,137 @@ class DataVirtualizationV1 extends BaseService {
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
+      }),
+    };
+
+    return this.createRequest(parameters);
+  }
+  /*************************
+   * caches
+   ************************/
+
+  /**
+   * List caches.
+   *
+   * List all active, inactive and deleted caches in Data Virtualization.
+   *
+   * @param {Object} [params] - The parameters to send to the service.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<DataVirtualizationV1.Response<DataVirtualizationV1.CacheListResponse>>}
+   */
+  public getCachesList(
+    params?: DataVirtualizationV1.GetCachesListParams
+  ): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.CacheListResponse>> {
+    const _params = { ...params };
+
+    const sdkHeaders = getSdkHeaders(
+      DataVirtualizationV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'getCachesList'
+    );
+
+    const parameters = {
+      options: {
+        url: '/v1/caching/caches',
+        method: 'GET',
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
+      }),
+    };
+
+    return this.createRequest(parameters);
+  }
+
+  /**
+   * List a cache.
+   *
+   * List a specific cache in Data Virtualization.
+   *
+   * @param {Object} params - The parameters to send to the service.
+   * @param {string} params.id - The ID of the cache to be listed.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<DataVirtualizationV1.Response<DataVirtualizationV1.CacheResponse>>}
+   */
+  public getCache(
+    params: DataVirtualizationV1.GetCacheParams
+  ): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.CacheResponse>> {
+    const _params = { ...params };
+    const requiredParams = ['id'];
+
+    const missingParams = getMissingParams(_params, requiredParams);
+    if (missingParams) {
+      return Promise.reject(missingParams);
+    }
+
+    const path = {
+      'id': _params.id,
+    };
+
+    const sdkHeaders = getSdkHeaders(DataVirtualizationV1.DEFAULT_SERVICE_NAME, 'v1', 'getCache');
+
+    const parameters = {
+      options: {
+        url: '/v1/caching/caches/{id}',
+        method: 'GET',
+        path,
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
+      }),
+    };
+
+    return this.createRequest(parameters);
+  }
+
+  /**
+   * Fetch the cache storage.
+   *
+   * Fetch the total cache storage and used capacities for active and inactive caches in Data Virtualization.
+   *
+   * @param {Object} [params] - The parameters to send to the service.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<DataVirtualizationV1.Response<DataVirtualizationV1.StorageDetails>>}
+   */
+  public getCacheStorageDetail(
+    params?: DataVirtualizationV1.GetCacheStorageDetailParams
+  ): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.StorageDetails>> {
+    const _params = { ...params };
+
+    const sdkHeaders = getSdkHeaders(
+      DataVirtualizationV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'getCacheStorageDetail'
+    );
+
+    const parameters = {
+      options: {
+        url: '/v1/caching/storage',
+        method: 'GET',
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
           },
           _params.headers
         ),
@@ -1008,6 +1240,13 @@ namespace DataVirtualizationV1 {
     connectionId: string;
     /** The identifier of the connection for the Data Virtualization.. */
     cid?: string;
+    headers?: OutgoingHttpHeaders;
+  }
+
+  /** Parameters for the `getObjectStoreConnectionsV2` operation. */
+  export interface GetObjectStoreConnectionsV2Params {
+    /** Supplied by proxy.  Do NOT add your own value. */
+    jwtAuthUserPayload?: string;
     headers?: OutgoingHttpHeaders;
   }
 
@@ -1074,7 +1313,7 @@ namespace DataVirtualizationV1 {
 
   /** Parameters for the `turnOnPolicyV2` operation. */
   export interface TurnOnPolicyV2Params {
-    /** Set the status of WKC policy. */
+    /** Set the status of policy enforcement. */
     status: string;
     headers?: OutgoingHttpHeaders;
   }
@@ -1111,6 +1350,24 @@ namespace DataVirtualizationV1 {
     headers?: OutgoingHttpHeaders;
   }
 
+  /** Parameters for the `virtualizeCosV2` operation. */
+  export interface VirtualizeCosV2Params {
+    /** the file path with bucket name. */
+    url: string;
+    /** the virtual table name. */
+    virtualName: string;
+    /** the virtual table schema. */
+    virtualSchema: string;
+    virtualTableDef: VirtualizeCosV2RequestVirtualTableDefItem[];
+    /** if repalce the existing one when create the virtual table. */
+    isReplace?: boolean;
+    /** the options used to virtualize file. */
+    options?: string;
+    /** Supplied by proxy.  Do NOT add your own value. */
+    jwtAuthUserPayload?: string;
+    headers?: OutgoingHttpHeaders;
+  }
+
   /** Parameters for the `getPrimaryCatalog` operation. */
   export interface GetPrimaryCatalogParams {
     headers?: OutgoingHttpHeaders;
@@ -1140,9 +1397,115 @@ namespace DataVirtualizationV1 {
     headers?: OutgoingHttpHeaders;
   }
 
+  /** Parameters for the `getCachesList` operation. */
+  export interface GetCachesListParams {
+    headers?: OutgoingHttpHeaders;
+  }
+
+  /** Parameters for the `getCache` operation. */
+  export interface GetCacheParams {
+    /** The ID of the cache to be listed. */
+    id: string;
+    headers?: OutgoingHttpHeaders;
+  }
+
+  /** Parameters for the `getCacheStorageDetail` operation. */
+  export interface GetCacheStorageDetailParams {
+    headers?: OutgoingHttpHeaders;
+  }
+
   /*************************
    * model interfaces
    ************************/
+
+  /** CacheListResponse. */
+  export interface CacheListResponse {
+    caches?: CacheListResponseCachesItem[];
+  }
+
+  /** CacheListResponseCachesItem. */
+  export interface CacheListResponseCachesItem {
+    /** The name of this cache. */
+    name?: string;
+    /** The unique ID of this cache. */
+    id?: string;
+    /** The query that defines this cache. */
+    query?: string;
+    /** Owner ID of this cache. */
+    owner_id?: string;
+    /** Type of the cache - User-defined (U), Recommended (R). */
+    type?: string;
+    /** Database timestamp at the time of cache creation. */
+    created_timestamp?: string;
+    /** Database timestamp when this cache was last modified (state change). */
+    last_modified_timestamp?: string;
+    /** Database timestamp when this cache was last refreshed. */
+    last_refresh_timestamp?: string;
+    /** Database timestamp when this cache was last used. */
+    last_used_timestamp?: string;
+    /** State of this cache - one of
+     *  Enabled,Disabled,Deleted,Failed,Populating,Activating,Enabling,Disabling,Refreshing,Deleting.
+     */
+    state?: string;
+    /** Size of this cache (in KB). */
+    size?: number;
+    /** Cardinality (number of rows) of this cache. */
+    cardinality?: number;
+    /** Time taken to refresh this cache most recently (in milliseconds). */
+    time_taken_for_refresh?: number;
+    /** Number of times this cache has been refreshed since creation. */
+    refresh_count?: number;
+    /** Hit Count of the cache (number of times this cache was used). */
+    hit_count?: number;
+    /** Encoded cron-style representation of the cache refresh schedule. */
+    refresh_schedule?: string;
+    /** Human-readable description of the cache refresh schedule. */
+    refresh_schedule_desc?: string;
+    /** Status message indicating the most recent error/issue with the cache, if any. */
+    status_msg?: string;
+  }
+
+  /** CacheResponse. */
+  export interface CacheResponse {
+    /** The name of this cache. */
+    name?: string;
+    /** The unique ID of this cache. */
+    id?: string;
+    /** The query that defines this cache. */
+    query?: string;
+    /** Owner ID of this cache. */
+    owner_id?: string;
+    /** Type of the cache - User-defined (U), Recommended (R). */
+    type?: string;
+    /** Database timestamp at the time of cache creation. */
+    created_timestamp?: string;
+    /** Database timestamp when this cache was last modified (state change). */
+    last_modified_timestamp?: string;
+    /** Database timestamp when this cache was last refreshed. */
+    last_refresh_timestamp?: string;
+    /** Database timestamp when this cache was last used. */
+    last_used_timestamp?: string;
+    /** State of this cache - one of
+     *  Enabled,Disabled,Deleted,Failed,Populating,Activating,Enabling,Disabling,Refreshing,Deleting.
+     */
+    state?: string;
+    /** Size of this cache (in KB). */
+    size?: number;
+    /** Cardinality (number of rows) of this cache. */
+    cardinality?: number;
+    /** Time taken to refresh this cache most recently (in milliseconds). */
+    time_taken_for_refresh?: number;
+    /** Number of times this cache has been refreshed since creation. */
+    refresh_count?: number;
+    /** Hit Count of the cache (number of times this cache was used). */
+    hit_count?: number;
+    /** Encoded cron-style representation of the cache refresh schedule. */
+    refresh_schedule?: string;
+    /** Human-readable description of the cache refresh schedule. */
+    refresh_schedule_desc?: string;
+    /** Status message indicating the most recent error/issue with the cache, if any. */
+    status_msg?: string;
+  }
 
   /** CatalogPublishResponseDuplicateAssetsItem. */
   export interface CatalogPublishResponseDuplicateAssetsItem {
@@ -1220,6 +1583,17 @@ namespace DataVirtualizationV1 {
     connection_name?: string;
   }
 
+  /** ObjStoreConnectionResponseV2CosConnectionsItem. */
+  export interface ObjStoreConnectionResponseV2CosConnectionsItem {
+    bucket_name?: string;
+    ccid?: string;
+    cid?: string;
+    endpoint?: string;
+    removed?: boolean;
+    service_type?: string;
+    status?: string;
+  }
+
   /** PostDatasourceConnection. */
   export interface PostDatasourceConnection {
     /** The identifier of data source connection. */
@@ -1289,6 +1663,32 @@ namespace DataVirtualizationV1 {
     url?: string;
   }
 
+  /** StorageDetails. */
+  export interface StorageDetails {
+    /** Total cache storage size. */
+    total_size?: string;
+    /** Storage details of active caches. */
+    enabled?: StorageDetailsEnabled;
+    /** Storage details of inactive caches. */
+    disabled?: StorageDetailsDisabled;
+  }
+
+  /** Storage details of inactive caches. */
+  export interface StorageDetailsDisabled {
+    /** Total size of all inactive caches (in KB). */
+    size?: number;
+    /** Number of inactive caches. */
+    count?: number;
+  }
+
+  /** Storage details of active caches. */
+  export interface StorageDetailsEnabled {
+    /** Total size of all active caches (in KB). */
+    size?: number;
+    /** Number of active caches. */
+    count?: number;
+  }
+
   /** TablesForRoleResponse. */
   export interface TablesForRoleResponse {
     objects?: TablesForRoleResponseObjectsItem[];
@@ -1305,6 +1705,12 @@ namespace DataVirtualizationV1 {
   /** TurnOnPolicyV2Response. */
   export interface TurnOnPolicyV2Response {
     status: string;
+  }
+
+  /** VirtualizeCosV2RequestVirtualTableDefItem. */
+  export interface VirtualizeCosV2RequestVirtualTableDefItem {
+    column_name: string;
+    column_type: string;
   }
 
   /** VirtualizeTableParameterSourceTableDefItem. */
@@ -1338,6 +1744,11 @@ namespace DataVirtualizationV1 {
     published_assets?: CatalogPublishResponsePublishedAssetsItem[];
   }
 
+  /** ObjStoreConnectionResponseV2. */
+  export interface ObjStoreConnectionResponseV2 {
+    cos_connections?: ObjStoreConnectionResponseV2CosConnectionsItem[];
+  }
+
   /** PostPrimaryCatalog. */
   export interface PostPrimaryCatalog {
     guid: string;
@@ -1350,6 +1761,11 @@ namespace DataVirtualizationV1 {
     entity?: PrimaryCatalogInfoEntity;
     href?: string;
     metadata?: PrimaryCatalogInfoMetadata;
+  }
+
+  /** SuccessResponse. */
+  export interface SuccessResponse {
+    message: string;
   }
 }
 

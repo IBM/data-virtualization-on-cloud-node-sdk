@@ -30,12 +30,12 @@ const {
   checkForSuccessfulExecution,
 } = unitTestUtils;
 
-const dataVirtualizationServiceOptions = {
+const service = {
   authenticator: new NoAuthAuthenticator(),
   url: 'ibm.com/123456',
 };
 
-const dataVirtualizationService = new DataVirtualizationV1(dataVirtualizationServiceOptions);
+const dataVirtualizationService = new DataVirtualizationV1(service);
 
 // dont actually create a request
 const createRequestMock = jest.spyOn(dataVirtualizationService, 'createRequest');
@@ -1098,7 +1098,7 @@ describe('DataVirtualizationV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        options = getOptions(createRequestMock);
+        const options = getOptions(createRequestMock);
 
         checkUrlAndMethod(options, '/v2/virtualization/cloud_object_storages', 'POST');
         const expectedAccept = 'application/json';

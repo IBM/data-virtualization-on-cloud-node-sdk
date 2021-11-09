@@ -1071,48 +1071,6 @@ describe('DataVirtualizationV1', () => {
         column_type: 'INTEGER',
       };
 
-      test('should pass the right params to createRequest', () => {
-        // Construct the params object for operation virtualizeCosV2
-        const url = 's3a://testBucket/home/data.csv';
-        const virtualName = 'testString';
-        const virtualSchema = 'testString';
-        const virtualTableDef = [virtualizeCosV2RequestVirtualTableDefItemModel];
-        const isReplace = true;
-        const options = 'INCPARTS=true';
-        const jwtAuthUserPayload = 'testString';
-        const params = {
-          url: url,
-          virtualName: virtualName,
-          virtualSchema: virtualSchema,
-          virtualTableDef: virtualTableDef,
-          isReplace: isReplace,
-          options: options,
-          jwtAuthUserPayload: jwtAuthUserPayload,
-        };
-
-        const virtualizeCosV2Result = dataVirtualizationService.virtualizeCosV2(params);
-
-        // all methods should return a Promise
-        expectToBePromise(virtualizeCosV2Result);
-
-        // assert that create request was called
-        expect(createRequestMock).toHaveBeenCalledTimes(1);
-
-        const getOptions = getOptions(createRequestMock);
-
-        checkUrlAndMethod(getOptions, '/v2/virtualization/cloud_object_storages', 'POST');
-        const expectedAccept = 'application/json';
-        const expectedContentType = 'application/json';
-        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        checkUserHeader(createRequestMock, 'jwt-auth-user-payload', jwtAuthUserPayload);
-        expect(getOptions.body['url']).toEqual(url);
-        expect(getOptions.body['virtual_name']).toEqual(virtualName);
-        expect(getOptions.body['virtual_schema']).toEqual(virtualSchema);
-        expect(getOptions.body['virtual_table_def']).toEqual(virtualTableDef);
-        expect(getOptions.body['is_replace']).toEqual(isReplace);
-        expect(getOptions.body['options']).toEqual(options);
-      });
-
       test('should prioritize user-given headers', () => {
         // parameters
         const url = 's3a://testBucket/home/data.csv';

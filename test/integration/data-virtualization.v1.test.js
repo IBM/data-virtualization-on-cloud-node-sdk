@@ -16,8 +16,8 @@
 
 /* eslint-disable no-console */
 
-const DataVirtualizationV1 = require('../../dist/data-virtualization/v1');
 const { readExternalSources } = require('ibm-cloud-sdk-core');
+const DataVirtualizationV1 = require('../../dist/data-virtualization/v1');
 const authHelper = require('../resources/auth-helper.js');
 
 // testcase timeout value (200s).
@@ -33,14 +33,14 @@ describe('DataVirtualizationV1_integration', () => {
 
   let dataVirtualizationService;
 
-  test('Initialise service', async() => {
+  test('Initialise service', async () => {
     dataVirtualizationService = DataVirtualizationV1.newInstance({});
 
     expect(dataVirtualizationService).not.toBeNull();
 
     const config = readExternalSources(DataVirtualizationV1.DEFAULT_SERVICE_NAME);
     expect(config).not.toBeNull();
-  
+
     dataVirtualizationService.enableRetries();
   });
 

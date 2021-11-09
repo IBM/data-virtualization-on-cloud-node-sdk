@@ -106,7 +106,8 @@ describe('DataVirtualizationV1', () => {
         // Construct the params object for operation listDatasourceConnections
         const params = {};
 
-        const listDatasourceConnectionsResult = dataVirtualizationService.listDatasourceConnections(params);
+        const listDatasourceConnectionsResult =
+          dataVirtualizationService.listDatasourceConnections(params);
 
         // all methods should return a Promise
         expectToBePromise(listDatasourceConnectionsResult);
@@ -205,14 +206,15 @@ describe('DataVirtualizationV1', () => {
         const properties = postDatasourceConnectionParametersPropertiesModel;
         const assetCategory = 'USER';
         const params = {
-          datasourceType: datasourceType,
-          name: name,
-          originCountry: originCountry,
-          properties: properties,
-          assetCategory: assetCategory,
+          datasourceType,
+          name,
+          originCountry,
+          properties,
+          assetCategory,
         };
 
-        const addDatasourceConnectionResult = dataVirtualizationService.addDatasourceConnection(params);
+        const addDatasourceConnectionResult =
+          dataVirtualizationService.addDatasourceConnection(params);
 
         // all methods should return a Promise
         expectToBePromise(addDatasourceConnectionResult);
@@ -303,11 +305,12 @@ describe('DataVirtualizationV1', () => {
         const connectionId = '75e4d01b-7417-4abc-b267-8ffb393fb970';
         const cid = 'DB210013';
         const params = {
-          connectionId: connectionId,
-          cid: cid,
+          connectionId,
+          cid,
         };
 
-        const deleteDatasourceConnectionResult = dataVirtualizationService.deleteDatasourceConnection(params);
+        const deleteDatasourceConnectionResult =
+          dataVirtualizationService.deleteDatasourceConnection(params);
 
         // all methods should return a Promise
         expectToBePromise(deleteDatasourceConnectionResult);
@@ -317,7 +320,11 @@ describe('DataVirtualizationV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(mockRequestOptions, '/v2/datasource/connections/{connection_id}', 'DELETE');
+        checkUrlAndMethod(
+          mockRequestOptions,
+          '/v2/datasource/connections/{connection_id}',
+          'DELETE'
+        );
         const expectedAccept = undefined;
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
@@ -388,10 +395,11 @@ describe('DataVirtualizationV1', () => {
         // Construct the params object for operation getObjectStoreConnectionsV2
         const jwtAuthUserPayload = 'testString';
         const params = {
-          jwtAuthUserPayload: jwtAuthUserPayload,
+          jwtAuthUserPayload,
         };
 
-        const getObjectStoreConnectionsV2Result = dataVirtualizationService.getObjectStoreConnectionsV2(params);
+        const getObjectStoreConnectionsV2Result =
+          dataVirtualizationService.getObjectStoreConnectionsV2(params);
 
         // all methods should return a Promise
         expectToBePromise(getObjectStoreConnectionsV2Result);
@@ -453,12 +461,13 @@ describe('DataVirtualizationV1', () => {
         const tableSchema = 'dv_ibmid_060000s4y5';
         const authid = 'PUBLIC';
         const params = {
-          tableName: tableName,
-          tableSchema: tableSchema,
-          authid: authid,
+          tableName,
+          tableSchema,
+          authid,
         };
 
-        const grantUserToVirtualTableResult = dataVirtualizationService.grantUserToVirtualTable(params);
+        const grantUserToVirtualTableResult =
+          dataVirtualizationService.grantUserToVirtualTable(params);
 
         // all methods should return a Promise
         expectToBePromise(grantUserToVirtualTableResult);
@@ -546,9 +555,9 @@ describe('DataVirtualizationV1', () => {
         const tableName = 'EMPLOYEE';
         const tableSchema = 'dv_ibmid_060000s4y5';
         const params = {
-          authid: authid,
-          tableName: tableName,
-          tableSchema: tableSchema,
+          authid,
+          tableName,
+          tableSchema,
         };
 
         const revokeUserFromObjectResult = dataVirtualizationService.revokeUserFromObject(params);
@@ -639,12 +648,13 @@ describe('DataVirtualizationV1', () => {
         const tableSchema = 'dv_ibmid_060000s4y5';
         const roleName = 'PUBLIC';
         const params = {
-          tableName: tableName,
-          tableSchema: tableSchema,
-          roleName: roleName,
+          tableName,
+          tableSchema,
+          roleName,
         };
 
-        const grantRolesToVirtualizedTableResult = dataVirtualizationService.grantRolesToVirtualizedTable(params);
+        const grantRolesToVirtualizedTableResult =
+          dataVirtualizationService.grantRolesToVirtualizedTable(params);
 
         // all methods should return a Promise
         expectToBePromise(grantRolesToVirtualizedTableResult);
@@ -730,12 +740,13 @@ describe('DataVirtualizationV1', () => {
         const tableName = 'EMPLOYEE';
         const tableSchema = 'dv_ibmid_060000s4y5';
         const params = {
-          roleName: roleName,
-          tableName: tableName,
-          tableSchema: tableSchema,
+          roleName,
+          tableName,
+          tableSchema,
         };
 
-        const dvaasRevokeRoleFromTableResult = dataVirtualizationService.dvaasRevokeRoleFromTable(params);
+        const dvaasRevokeRoleFromTableResult =
+          dataVirtualizationService.dvaasRevokeRoleFromTable(params);
 
         // all methods should return a Promise
         expectToBePromise(dvaasRevokeRoleFromTableResult);
@@ -821,7 +832,7 @@ describe('DataVirtualizationV1', () => {
         // Construct the params object for operation listTablesForRole
         const rolename = 'MANAGER | STEWARD | ENGINEER | USER';
         const params = {
-          rolename: rolename,
+          rolename,
         };
 
         const listTablesForRoleResult = dataVirtualizationService.listTablesForRole(params);
@@ -904,7 +915,7 @@ describe('DataVirtualizationV1', () => {
         // Construct the params object for operation turnOnPolicyV2
         const status = 'enabled';
         const params = {
-          status: status,
+          status,
         };
 
         const turnOnPolicyV2Result = dataVirtualizationService.turnOnPolicyV2(params);
@@ -1067,14 +1078,14 @@ describe('DataVirtualizationV1', () => {
         const isIncludedColumns = 'Y, Y, N';
         const replace = false;
         const params = {
-          sourceName: sourceName,
-          sourceTableDef: sourceTableDef,
-          sources: sources,
-          virtualName: virtualName,
-          virtualSchema: virtualSchema,
-          virtualTableDef: virtualTableDef,
-          isIncludedColumns: isIncludedColumns,
-          replace: replace,
+          sourceName,
+          sourceTableDef,
+          sources,
+          virtualName,
+          virtualSchema,
+          virtualTableDef,
+          isIncludedColumns,
+          replace,
         };
 
         const dvaasVirtualizeTableResult = dataVirtualizationService.dvaasVirtualizeTable(params);
@@ -1175,8 +1186,8 @@ describe('DataVirtualizationV1', () => {
         const virtualSchema = 'testString';
         const virtualName = 'testString';
         const params = {
-          virtualSchema: virtualSchema,
-          virtualName: virtualName,
+          virtualSchema,
+          virtualName,
         };
 
         const deleteTableResult = dataVirtualizationService.deleteTable(params);
@@ -1276,13 +1287,13 @@ describe('DataVirtualizationV1', () => {
         const options = 'INCPARTS=true';
         const jwtAuthUserPayload = 'testString';
         const params = {
-          url: url,
-          virtualName: virtualName,
-          virtualSchema: virtualSchema,
-          virtualTableDef: virtualTableDef,
-          isReplace: isReplace,
-          options: options,
-          jwtAuthUserPayload: jwtAuthUserPayload,
+          url,
+          virtualName,
+          virtualSchema,
+          virtualTableDef,
+          isReplace,
+          options,
+          jwtAuthUserPayload,
         };
 
         const virtualizeCosV2Result = dataVirtualizationService.virtualizeCosV2(params);
@@ -1436,7 +1447,7 @@ describe('DataVirtualizationV1', () => {
         // Construct the params object for operation postPrimaryCatalog
         const guid = 'd77fc432-9b1a-4938-a2a5-9f37e08041f6';
         const params = {
-          guid: guid,
+          guid,
         };
 
         const postPrimaryCatalogResult = dataVirtualizationService.postPrimaryCatalog(params);
@@ -1519,7 +1530,7 @@ describe('DataVirtualizationV1', () => {
         // Construct the params object for operation deletePrimaryCatalog
         const guid = 'd77fc432-9b1a-4938-a2a5-9f37e08041f6';
         const params = {
-          guid: guid,
+          guid,
         };
 
         const deletePrimaryCatalogResult = dataVirtualizationService.deletePrimaryCatalog(params);
@@ -1612,9 +1623,9 @@ describe('DataVirtualizationV1', () => {
         const allowDuplicates = false;
         const assets = [postPrimaryCatalogParametersAssetsItemModel];
         const params = {
-          catalogId: catalogId,
-          allowDuplicates: allowDuplicates,
-          assets: assets,
+          catalogId,
+          allowDuplicates,
+          assets,
         };
 
         const publishAssetsResult = dataVirtualizationService.publishAssets(params);
@@ -1762,7 +1773,7 @@ describe('DataVirtualizationV1', () => {
         // Construct the params object for operation getCache
         const id = 'DV20210810191252390327';
         const params = {
-          id: id,
+          id,
         };
 
         const getCacheResult = dataVirtualizationService.getCache(params);

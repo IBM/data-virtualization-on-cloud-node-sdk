@@ -1098,7 +1098,7 @@ describe('DataVirtualizationV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        options = getOptions(createRequestMock);
 
         checkUrlAndMethod(options, '/v2/virtualization/cloud_object_storages', 'POST');
         const expectedAccept = 'application/json';

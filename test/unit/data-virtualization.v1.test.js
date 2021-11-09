@@ -1098,19 +1098,19 @@ describe('DataVirtualizationV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const getOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/v2/virtualization/cloud_object_storages', 'POST');
+        checkUrlAndMethod(getOptions, '/v2/virtualization/cloud_object_storages', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'jwt-auth-user-payload', jwtAuthUserPayload);
-        expect(options.body['url']).toEqual(url);
-        expect(options.body['virtual_name']).toEqual(virtualName);
-        expect(options.body['virtual_schema']).toEqual(virtualSchema);
-        expect(options.body['virtual_table_def']).toEqual(virtualTableDef);
-        expect(options.body['is_replace']).toEqual(isReplace);
-        expect(options.body['options']).toEqual(options);
+        expect(getOptions.body['url']).toEqual(url);
+        expect(getOptions.body['virtual_name']).toEqual(virtualName);
+        expect(getOptions.body['virtual_schema']).toEqual(virtualSchema);
+        expect(getOptions.body['virtual_table_def']).toEqual(virtualTableDef);
+        expect(getOptions.body['is_replace']).toEqual(isReplace);
+        expect(getOptions.body['options']).toEqual(options);
       });
 
       test('should prioritize user-given headers', () => {

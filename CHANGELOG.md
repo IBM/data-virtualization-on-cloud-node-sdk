@@ -1,3 +1,10 @@
+# [0.1.0](https://github.com/IBM/data-virtualization-on-cloud-node-sdk/compare/v0.0.2...v0.1.0) (2021-11-09)
+
+
+### Features
+
+* **global catalog:** add api SDK for cache and object store ([#21](https://github.com/IBM/data-virtualization-on-cloud-node-sdk/issues/21)) ([3826e85](https://github.com/IBM/data-virtualization-on-cloud-node-sdk/commit/3826e8587368790b0540db889f8c850c700c158e))
+
 ## [0.0.2](https://github.com/IBM/data-virtualization-on-cloud-node-sdk/compare/v0.0.1...v0.0.2) (2021-08-12)
 
 

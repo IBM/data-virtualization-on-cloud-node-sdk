@@ -15,28 +15,22 @@
  */
 
 /**
- * IBM OpenAPI SDK Code Generator Version: 3.42.0-8746aaa4-20211102-213344
+ * IBM OpenAPI SDK Code Generator Version: 3.34.1-ad041667-20210617-195430
  */
+
 
 import * as extend from 'extend';
 import { IncomingHttpHeaders, OutgoingHttpHeaders } from 'http';
-import {
-  Authenticator,
-  BaseService,
-  getAuthenticatorFromEnvironment,
-  getMissingParams,
-  UserOptions,
-} from 'ibm-cloud-sdk-core';
+import { Authenticator, BaseService, getAuthenticatorFromEnvironment, getMissingParams, UserOptions } from 'ibm-cloud-sdk-core';
 import { getSdkHeaders } from '../lib/common';
 
 /**
  * The Data Virtualization REST API connects to your service, so you can manage your virtual data, data sources, and
  * user roles.
- *
- * API Version: 1.6.0
  */
 
 class DataVirtualizationV1 extends BaseService {
+
   static DEFAULT_SERVICE_NAME: string = 'data_virtualization';
 
   /*************************
@@ -70,6 +64,7 @@ class DataVirtualizationV1 extends BaseService {
     return service;
   }
 
+
   /**
    * Construct a DataVirtualizationV1 object.
    *
@@ -102,16 +97,10 @@ class DataVirtualizationV1 extends BaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DataVirtualizationV1.Response<DataVirtualizationV1.DatasourceConnectionsList>>}
    */
-  public listDatasourceConnections(
-    params?: DataVirtualizationV1.ListDatasourceConnectionsParams
-  ): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.DatasourceConnectionsList>> {
-    const _params = { ...params };
+  public listDatasourceConnections(params?: DataVirtualizationV1.ListDatasourceConnectionsParams): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.DatasourceConnectionsList>> {
+    const _params = Object.assign({}, params);
 
-    const sdkHeaders = getSdkHeaders(
-      DataVirtualizationV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'listDatasourceConnections'
-    );
+    const sdkHeaders = getSdkHeaders(DataVirtualizationV1.DEFAULT_SERVICE_NAME, 'v1', 'listDatasourceConnections');
 
     const parameters = {
       options: {
@@ -119,19 +108,14 @@ class DataVirtualizationV1 extends BaseService {
         method: 'GET',
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-            'Accept': 'application/json',
-          },
-          _params.headers
-        ),
+        headers: extend(true, sdkHeaders, {
+          'Accept': 'application/json',
+        }, _params.headers),
       }),
     };
 
     return this.createRequest(parameters);
-  }
+  };
 
   /**
    * Add data source connection.
@@ -147,10 +131,8 @@ class DataVirtualizationV1 extends BaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DataVirtualizationV1.Response<DataVirtualizationV1.PostDatasourceConnection>>}
    */
-  public addDatasourceConnection(
-    params: DataVirtualizationV1.AddDatasourceConnectionParams
-  ): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.PostDatasourceConnection>> {
-    const _params = { ...params };
+  public addDatasourceConnection(params: DataVirtualizationV1.AddDatasourceConnectionParams): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.PostDatasourceConnection>> {
+    const _params = Object.assign({}, params);
     const requiredParams = ['datasourceType', 'name', 'originCountry', 'properties'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -163,14 +145,10 @@ class DataVirtualizationV1 extends BaseService {
       'name': _params.name,
       'origin_country': _params.originCountry,
       'properties': _params.properties,
-      'asset_category': _params.assetCategory,
+      'asset_category': _params.assetCategory
     };
 
-    const sdkHeaders = getSdkHeaders(
-      DataVirtualizationV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'addDatasourceConnection'
-    );
+    const sdkHeaders = getSdkHeaders(DataVirtualizationV1.DEFAULT_SERVICE_NAME, 'v1', 'addDatasourceConnection');
 
     const parameters = {
       options: {
@@ -179,20 +157,15 @@ class DataVirtualizationV1 extends BaseService {
         body,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-          },
-          _params.headers
-        ),
+        headers: extend(true, sdkHeaders, {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        }, _params.headers),
       }),
     };
 
     return this.createRequest(parameters);
-  }
+  };
 
   /**
    * Delete data source connection.
@@ -205,10 +178,8 @@ class DataVirtualizationV1 extends BaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DataVirtualizationV1.Response<DataVirtualizationV1.Empty>>}
    */
-  public deleteDatasourceConnection(
-    params: DataVirtualizationV1.DeleteDatasourceConnectionParams
-  ): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.Empty>> {
-    const _params = { ...params };
+  public deleteDatasourceConnection(params: DataVirtualizationV1.DeleteDatasourceConnectionParams): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.Empty>> {
+    const _params = Object.assign({}, params);
     const requiredParams = ['connectionId'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -217,18 +188,14 @@ class DataVirtualizationV1 extends BaseService {
     }
 
     const query = {
-      'cid': _params.cid,
+      'cid': _params.cid
     };
 
     const path = {
-      'connection_id': _params.connectionId,
+      'connection_id': _params.connectionId
     };
 
-    const sdkHeaders = getSdkHeaders(
-      DataVirtualizationV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'deleteDatasourceConnection'
-    );
+    const sdkHeaders = getSdkHeaders(DataVirtualizationV1.DEFAULT_SERVICE_NAME, 'v1', 'deleteDatasourceConnection');
 
     const parameters = {
       options: {
@@ -238,12 +205,13 @@ class DataVirtualizationV1 extends BaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {}, _params.headers),
+        headers: extend(true, sdkHeaders, {
+        }, _params.headers),
       }),
     };
 
     return this.createRequest(parameters);
-  }
+  };
 
   /**
    * Gets object store connection details.
@@ -253,16 +221,10 @@ class DataVirtualizationV1 extends BaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DataVirtualizationV1.Response<DataVirtualizationV1.ObjStoreConnectionResponseV2>>}
    */
-  public getObjectStoreConnectionsV2(
-    params?: DataVirtualizationV1.GetObjectStoreConnectionsV2Params
-  ): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.ObjStoreConnectionResponseV2>> {
-    const _params = { ...params };
+  public getObjectStoreConnectionsV2(params?: DataVirtualizationV1.GetObjectStoreConnectionsV2Params): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.ObjStoreConnectionResponseV2>> {
+    const _params = Object.assign({}, params);
 
-    const sdkHeaders = getSdkHeaders(
-      DataVirtualizationV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getObjectStoreConnectionsV2'
-    );
+    const sdkHeaders = getSdkHeaders(DataVirtualizationV1.DEFAULT_SERVICE_NAME, 'v1', 'getObjectStoreConnectionsV2');
 
     const parameters = {
       options: {
@@ -270,20 +232,16 @@ class DataVirtualizationV1 extends BaseService {
         method: 'GET',
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-            'Accept': 'application/json',
-            'jwt-auth-user-payload': _params.jwtAuthUserPayload,
-          },
-          _params.headers
-        ),
+        headers: extend(true, sdkHeaders, {
+          'Accept': 'application/json',
+          'jwt-auth-user-payload': _params.jwtAuthUserPayload
+        }, _params.headers),
       }),
     };
 
     return this.createRequest(parameters);
-  }
+  };
+
   /*************************
    * users
    ************************/
@@ -301,10 +259,8 @@ class DataVirtualizationV1 extends BaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DataVirtualizationV1.Response<DataVirtualizationV1.Empty>>}
    */
-  public grantUserToVirtualTable(
-    params: DataVirtualizationV1.GrantUserToVirtualTableParams
-  ): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.Empty>> {
-    const _params = { ...params };
+  public grantUserToVirtualTable(params: DataVirtualizationV1.GrantUserToVirtualTableParams): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.Empty>> {
+    const _params = Object.assign({}, params);
     const requiredParams = ['tableName', 'tableSchema', 'authid'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -315,14 +271,10 @@ class DataVirtualizationV1 extends BaseService {
     const body = {
       'table_name': _params.tableName,
       'table_schema': _params.tableSchema,
-      'authid': _params.authid,
+      'authid': _params.authid
     };
 
-    const sdkHeaders = getSdkHeaders(
-      DataVirtualizationV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'grantUserToVirtualTable'
-    );
+    const sdkHeaders = getSdkHeaders(DataVirtualizationV1.DEFAULT_SERVICE_NAME, 'v1', 'grantUserToVirtualTable');
 
     const parameters = {
       options: {
@@ -331,19 +283,14 @@ class DataVirtualizationV1 extends BaseService {
         body,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-            'Content-Type': 'application/json',
-          },
-          _params.headers
-        ),
+        headers: extend(true, sdkHeaders, {
+          'Content-Type': 'application/json',
+        }, _params.headers),
       }),
     };
 
     return this.createRequest(parameters);
-  }
+  };
 
   /**
    * Revoke user acccess.
@@ -358,10 +305,8 @@ class DataVirtualizationV1 extends BaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DataVirtualizationV1.Response<DataVirtualizationV1.Empty>>}
    */
-  public revokeUserFromObject(
-    params: DataVirtualizationV1.RevokeUserFromObjectParams
-  ): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.Empty>> {
-    const _params = { ...params };
+  public revokeUserFromObject(params: DataVirtualizationV1.RevokeUserFromObjectParams): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.Empty>> {
+    const _params = Object.assign({}, params);
     const requiredParams = ['authid', 'tableName', 'tableSchema'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -371,18 +316,14 @@ class DataVirtualizationV1 extends BaseService {
 
     const query = {
       'table_name': _params.tableName,
-      'table_schema': _params.tableSchema,
+      'table_schema': _params.tableSchema
     };
 
     const path = {
-      'authid': _params.authid,
+      'authid': _params.authid
     };
 
-    const sdkHeaders = getSdkHeaders(
-      DataVirtualizationV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'revokeUserFromObject'
-    );
+    const sdkHeaders = getSdkHeaders(DataVirtualizationV1.DEFAULT_SERVICE_NAME, 'v1', 'revokeUserFromObject');
 
     const parameters = {
       options: {
@@ -392,12 +333,14 @@ class DataVirtualizationV1 extends BaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {}, _params.headers),
+        headers: extend(true, sdkHeaders, {
+        }, _params.headers),
       }),
     };
 
     return this.createRequest(parameters);
-  }
+  };
+
   /*************************
    * roles
    ************************/
@@ -415,10 +358,8 @@ class DataVirtualizationV1 extends BaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DataVirtualizationV1.Response<DataVirtualizationV1.Empty>>}
    */
-  public grantRolesToVirtualizedTable(
-    params: DataVirtualizationV1.GrantRolesToVirtualizedTableParams
-  ): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.Empty>> {
-    const _params = { ...params };
+  public grantRolesToVirtualizedTable(params: DataVirtualizationV1.GrantRolesToVirtualizedTableParams): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.Empty>> {
+    const _params = Object.assign({}, params);
     const requiredParams = ['tableName', 'tableSchema'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -429,14 +370,10 @@ class DataVirtualizationV1 extends BaseService {
     const body = {
       'table_name': _params.tableName,
       'table_schema': _params.tableSchema,
-      'role_name': _params.roleName,
+      'role_name': _params.roleName
     };
 
-    const sdkHeaders = getSdkHeaders(
-      DataVirtualizationV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'grantRolesToVirtualizedTable'
-    );
+    const sdkHeaders = getSdkHeaders(DataVirtualizationV1.DEFAULT_SERVICE_NAME, 'v1', 'grantRolesToVirtualizedTable');
 
     const parameters = {
       options: {
@@ -445,19 +382,14 @@ class DataVirtualizationV1 extends BaseService {
         body,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-            'Content-Type': 'application/json',
-          },
-          _params.headers
-        ),
+        headers: extend(true, sdkHeaders, {
+          'Content-Type': 'application/json',
+        }, _params.headers),
       }),
     };
 
     return this.createRequest(parameters);
-  }
+  };
 
   /**
    * Delete role.
@@ -472,10 +404,8 @@ class DataVirtualizationV1 extends BaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DataVirtualizationV1.Response<DataVirtualizationV1.Empty>>}
    */
-  public dvaasRevokeRoleFromTable(
-    params: DataVirtualizationV1.DvaasRevokeRoleFromTableParams
-  ): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.Empty>> {
-    const _params = { ...params };
+  public dvaasRevokeRoleFromTable(params: DataVirtualizationV1.DvaasRevokeRoleFromTableParams): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.Empty>> {
+    const _params = Object.assign({}, params);
     const requiredParams = ['roleName', 'tableName', 'tableSchema'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -485,18 +415,14 @@ class DataVirtualizationV1 extends BaseService {
 
     const query = {
       'table_name': _params.tableName,
-      'table_schema': _params.tableSchema,
+      'table_schema': _params.tableSchema
     };
 
     const path = {
-      'role_name': _params.roleName,
+      'role_name': _params.roleName
     };
 
-    const sdkHeaders = getSdkHeaders(
-      DataVirtualizationV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'dvaasRevokeRoleFromTable'
-    );
+    const sdkHeaders = getSdkHeaders(DataVirtualizationV1.DEFAULT_SERVICE_NAME, 'v1', 'dvaasRevokeRoleFromTable');
 
     const parameters = {
       options: {
@@ -506,12 +432,13 @@ class DataVirtualizationV1 extends BaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {}, _params.headers),
+        headers: extend(true, sdkHeaders, {
+        }, _params.headers),
       }),
     };
 
     return this.createRequest(parameters);
-  }
+  };
 
   /**
    * Get virtualized tables by role.
@@ -524,10 +451,8 @@ class DataVirtualizationV1 extends BaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DataVirtualizationV1.Response<DataVirtualizationV1.TablesForRoleResponse>>}
    */
-  public listTablesForRole(
-    params: DataVirtualizationV1.ListTablesForRoleParams
-  ): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.TablesForRoleResponse>> {
-    const _params = { ...params };
+  public listTablesForRole(params: DataVirtualizationV1.ListTablesForRoleParams): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.TablesForRoleResponse>> {
+    const _params = Object.assign({}, params);
     const requiredParams = ['rolename'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -536,14 +461,10 @@ class DataVirtualizationV1 extends BaseService {
     }
 
     const query = {
-      'rolename': _params.rolename,
+      'rolename': _params.rolename
     };
 
-    const sdkHeaders = getSdkHeaders(
-      DataVirtualizationV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'listTablesForRole'
-    );
+    const sdkHeaders = getSdkHeaders(DataVirtualizationV1.DEFAULT_SERVICE_NAME, 'v1', 'listTablesForRole');
 
     const parameters = {
       options: {
@@ -552,19 +473,15 @@ class DataVirtualizationV1 extends BaseService {
         qs: query,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-            'Accept': 'application/json',
-          },
-          _params.headers
-        ),
+        headers: extend(true, sdkHeaders, {
+          'Accept': 'application/json',
+        }, _params.headers),
       }),
     };
 
     return this.createRequest(parameters);
-  }
+  };
+
   /*************************
    * securities
    ************************/
@@ -579,10 +496,8 @@ class DataVirtualizationV1 extends BaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DataVirtualizationV1.Response<DataVirtualizationV1.TurnOnPolicyV2Response>>}
    */
-  public turnOnPolicyV2(
-    params: DataVirtualizationV1.TurnOnPolicyV2Params
-  ): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.TurnOnPolicyV2Response>> {
-    const _params = { ...params };
+  public turnOnPolicyV2(params: DataVirtualizationV1.TurnOnPolicyV2Params): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.TurnOnPolicyV2Response>> {
+    const _params = Object.assign({}, params);
     const requiredParams = ['status'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -591,14 +506,10 @@ class DataVirtualizationV1 extends BaseService {
     }
 
     const query = {
-      'status': _params.status,
+      'status': _params.status
     };
 
-    const sdkHeaders = getSdkHeaders(
-      DataVirtualizationV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'turnOnPolicyV2'
-    );
+    const sdkHeaders = getSdkHeaders(DataVirtualizationV1.DEFAULT_SERVICE_NAME, 'v1', 'turnOnPolicyV2');
 
     const parameters = {
       options: {
@@ -607,19 +518,14 @@ class DataVirtualizationV1 extends BaseService {
         qs: query,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-            'Accept': 'application/json',
-          },
-          _params.headers
-        ),
+        headers: extend(true, sdkHeaders, {
+          'Accept': 'application/json',
+        }, _params.headers),
       }),
     };
 
     return this.createRequest(parameters);
-  }
+  };
 
   /**
    * Get policy enforcement status.
@@ -630,16 +536,10 @@ class DataVirtualizationV1 extends BaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DataVirtualizationV1.Response<DataVirtualizationV1.CheckPolicyStatusV2Response>>}
    */
-  public checkPolicyStatusV2(
-    params?: DataVirtualizationV1.CheckPolicyStatusV2Params
-  ): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.CheckPolicyStatusV2Response>> {
-    const _params = { ...params };
+  public checkPolicyStatusV2(params?: DataVirtualizationV1.CheckPolicyStatusV2Params): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.CheckPolicyStatusV2Response>> {
+    const _params = Object.assign({}, params);
 
-    const sdkHeaders = getSdkHeaders(
-      DataVirtualizationV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'checkPolicyStatusV2'
-    );
+    const sdkHeaders = getSdkHeaders(DataVirtualizationV1.DEFAULT_SERVICE_NAME, 'v1', 'checkPolicyStatusV2');
 
     const parameters = {
       options: {
@@ -647,19 +547,15 @@ class DataVirtualizationV1 extends BaseService {
         method: 'GET',
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-            'Accept': 'application/json',
-          },
-          _params.headers
-        ),
+        headers: extend(true, sdkHeaders, {
+          'Accept': 'application/json',
+        }, _params.headers),
       }),
     };
 
     return this.createRequest(parameters);
-  }
+  };
+
   /*************************
    * virtualization
    ************************/
@@ -681,18 +577,10 @@ class DataVirtualizationV1 extends BaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DataVirtualizationV1.Response<DataVirtualizationV1.VirtualizeTableResponse>>}
    */
-  public dvaasVirtualizeTable(
-    params: DataVirtualizationV1.DvaasVirtualizeTableParams
-  ): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.VirtualizeTableResponse>> {
-    const _params = { ...params };
-    const requiredParams = [
-      'sourceName',
-      'sourceTableDef',
-      'sources',
-      'virtualName',
-      'virtualSchema',
-      'virtualTableDef',
-    ];
+  public dvaasVirtualizeTable(params: DataVirtualizationV1.DvaasVirtualizeTableParams): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.VirtualizeTableResponse>> {
+    const _params = Object.assign({}, params);
+    const requiredParams = ['sourceName', 'sourceTableDef', 'sources', 'virtualName', 'virtualSchema', 'virtualTableDef'];
+
     const missingParams = getMissingParams(_params, requiredParams);
     if (missingParams) {
       return Promise.reject(missingParams);
@@ -706,14 +594,10 @@ class DataVirtualizationV1 extends BaseService {
       'virtual_schema': _params.virtualSchema,
       'virtual_table_def': _params.virtualTableDef,
       'is_included_columns': _params.isIncludedColumns,
-      'replace': _params.replace,
+      'replace': _params.replace
     };
 
-    const sdkHeaders = getSdkHeaders(
-      DataVirtualizationV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'dvaasVirtualizeTable'
-    );
+    const sdkHeaders = getSdkHeaders(DataVirtualizationV1.DEFAULT_SERVICE_NAME, 'v1', 'dvaasVirtualizeTable');
 
     const parameters = {
       options: {
@@ -722,20 +606,15 @@ class DataVirtualizationV1 extends BaseService {
         body,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-          },
-          _params.headers
-        ),
+        headers: extend(true, sdkHeaders, {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        }, _params.headers),
       }),
     };
 
     return this.createRequest(parameters);
-  }
+  };
 
   /**
    * Delete virtualized table.
@@ -748,10 +627,8 @@ class DataVirtualizationV1 extends BaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DataVirtualizationV1.Response<DataVirtualizationV1.Empty>>}
    */
-  public deleteTable(
-    params: DataVirtualizationV1.DeleteTableParams
-  ): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.Empty>> {
-    const _params = { ...params };
+  public deleteTable(params: DataVirtualizationV1.DeleteTableParams): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.Empty>> {
+    const _params = Object.assign({}, params);
     const requiredParams = ['virtualSchema', 'virtualName'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -760,18 +637,14 @@ class DataVirtualizationV1 extends BaseService {
     }
 
     const query = {
-      'virtual_schema': _params.virtualSchema,
+      'virtual_schema': _params.virtualSchema
     };
 
     const path = {
-      'virtual_name': _params.virtualName,
+      'virtual_name': _params.virtualName
     };
 
-    const sdkHeaders = getSdkHeaders(
-      DataVirtualizationV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'deleteTable'
-    );
+    const sdkHeaders = getSdkHeaders(DataVirtualizationV1.DEFAULT_SERVICE_NAME, 'v1', 'deleteTable');
 
     const parameters = {
       options: {
@@ -781,12 +654,13 @@ class DataVirtualizationV1 extends BaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {}, _params.headers),
+        headers: extend(true, sdkHeaders, {
+        }, _params.headers),
       }),
     };
 
     return this.createRequest(parameters);
-  }
+  };
 
   /**
    * Create a remote table for the ORC or Parquet file on a cloud object store (COS).
@@ -804,10 +678,8 @@ class DataVirtualizationV1 extends BaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DataVirtualizationV1.Response<DataVirtualizationV1.SuccessResponse>>}
    */
-  public virtualizeCosV2(
-    params: DataVirtualizationV1.VirtualizeCosV2Params
-  ): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.SuccessResponse>> {
-    const _params = { ...params };
+  public virtualizeCosV2(params: DataVirtualizationV1.VirtualizeCosV2Params): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.SuccessResponse>> {
+    const _params = Object.assign({}, params);
     const requiredParams = ['url', 'virtualName', 'virtualSchema', 'virtualTableDef'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -821,14 +693,10 @@ class DataVirtualizationV1 extends BaseService {
       'virtual_schema': _params.virtualSchema,
       'virtual_table_def': _params.virtualTableDef,
       'is_replace': _params.isReplace,
-      'options': _params.options,
+      'options': _params.options
     };
 
-    const sdkHeaders = getSdkHeaders(
-      DataVirtualizationV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'virtualizeCosV2'
-    );
+    const sdkHeaders = getSdkHeaders(DataVirtualizationV1.DEFAULT_SERVICE_NAME, 'v1', 'virtualizeCosV2');
 
     const parameters = {
       options: {
@@ -837,21 +705,17 @@ class DataVirtualizationV1 extends BaseService {
         body,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'jwt-auth-user-payload': _params.jwtAuthUserPayload,
-          },
-          _params.headers
-        ),
+        headers: extend(true, sdkHeaders, {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'jwt-auth-user-payload': _params.jwtAuthUserPayload
+        }, _params.headers),
       }),
     };
 
     return this.createRequest(parameters);
-  }
+  };
+
   /*************************
    * primaryCatalog
    ************************/
@@ -865,16 +729,10 @@ class DataVirtualizationV1 extends BaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DataVirtualizationV1.Response<DataVirtualizationV1.PrimaryCatalogInfo>>}
    */
-  public getPrimaryCatalog(
-    params?: DataVirtualizationV1.GetPrimaryCatalogParams
-  ): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.PrimaryCatalogInfo>> {
-    const _params = { ...params };
+  public getPrimaryCatalog(params?: DataVirtualizationV1.GetPrimaryCatalogParams): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.PrimaryCatalogInfo>> {
+    const _params = Object.assign({}, params);
 
-    const sdkHeaders = getSdkHeaders(
-      DataVirtualizationV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getPrimaryCatalog'
-    );
+    const sdkHeaders = getSdkHeaders(DataVirtualizationV1.DEFAULT_SERVICE_NAME, 'v1', 'getPrimaryCatalog');
 
     const parameters = {
       options: {
@@ -882,19 +740,14 @@ class DataVirtualizationV1 extends BaseService {
         method: 'GET',
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-            'Accept': 'application/json',
-          },
-          _params.headers
-        ),
+        headers: extend(true, sdkHeaders, {
+          'Accept': 'application/json',
+        }, _params.headers),
       }),
     };
 
     return this.createRequest(parameters);
-  }
+  };
 
   /**
    * Add primary catalog.
@@ -906,10 +759,8 @@ class DataVirtualizationV1 extends BaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DataVirtualizationV1.Response<DataVirtualizationV1.PostPrimaryCatalog>>}
    */
-  public postPrimaryCatalog(
-    params: DataVirtualizationV1.PostPrimaryCatalogParams
-  ): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.PostPrimaryCatalog>> {
-    const _params = { ...params };
+  public postPrimaryCatalog(params: DataVirtualizationV1.PostPrimaryCatalogParams): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.PostPrimaryCatalog>> {
+    const _params = Object.assign({}, params);
     const requiredParams = ['guid'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -918,14 +769,10 @@ class DataVirtualizationV1 extends BaseService {
     }
 
     const body = {
-      'guid': _params.guid,
+      'guid': _params.guid
     };
 
-    const sdkHeaders = getSdkHeaders(
-      DataVirtualizationV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'postPrimaryCatalog'
-    );
+    const sdkHeaders = getSdkHeaders(DataVirtualizationV1.DEFAULT_SERVICE_NAME, 'v1', 'postPrimaryCatalog');
 
     const parameters = {
       options: {
@@ -934,20 +781,15 @@ class DataVirtualizationV1 extends BaseService {
         body,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-          },
-          _params.headers
-        ),
+        headers: extend(true, sdkHeaders, {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        }, _params.headers),
       }),
     };
 
     return this.createRequest(parameters);
-  }
+  };
 
   /**
    * Delete primary catalog.
@@ -960,10 +802,8 @@ class DataVirtualizationV1 extends BaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DataVirtualizationV1.Response<DataVirtualizationV1.Empty>>}
    */
-  public deletePrimaryCatalog(
-    params: DataVirtualizationV1.DeletePrimaryCatalogParams
-  ): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.Empty>> {
-    const _params = { ...params };
+  public deletePrimaryCatalog(params: DataVirtualizationV1.DeletePrimaryCatalogParams): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.Empty>> {
+    const _params = Object.assign({}, params);
     const requiredParams = ['guid'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -972,14 +812,10 @@ class DataVirtualizationV1 extends BaseService {
     }
 
     const query = {
-      'guid': _params.guid,
+      'guid': _params.guid
     };
 
-    const sdkHeaders = getSdkHeaders(
-      DataVirtualizationV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'deletePrimaryCatalog'
-    );
+    const sdkHeaders = getSdkHeaders(DataVirtualizationV1.DEFAULT_SERVICE_NAME, 'v1', 'deletePrimaryCatalog');
 
     const parameters = {
       options: {
@@ -988,12 +824,14 @@ class DataVirtualizationV1 extends BaseService {
         qs: query,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {}, _params.headers),
+        headers: extend(true, sdkHeaders, {
+        }, _params.headers),
       }),
     };
 
     return this.createRequest(parameters);
-  }
+  };
+
   /*************************
    * publishObjects
    ************************/
@@ -1010,10 +848,8 @@ class DataVirtualizationV1 extends BaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DataVirtualizationV1.Response<DataVirtualizationV1.CatalogPublishResponse>>}
    */
-  public publishAssets(
-    params: DataVirtualizationV1.PublishAssetsParams
-  ): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.CatalogPublishResponse>> {
-    const _params = { ...params };
+  public publishAssets(params: DataVirtualizationV1.PublishAssetsParams): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.CatalogPublishResponse>> {
+    const _params = Object.assign({}, params);
     const requiredParams = ['catalogId', 'allowDuplicates', 'assets'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -1024,14 +860,10 @@ class DataVirtualizationV1 extends BaseService {
     const body = {
       'catalog_id': _params.catalogId,
       'allow_duplicates': _params.allowDuplicates,
-      'assets': _params.assets,
+      'assets': _params.assets
     };
 
-    const sdkHeaders = getSdkHeaders(
-      DataVirtualizationV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'publishAssets'
-    );
+    const sdkHeaders = getSdkHeaders(DataVirtualizationV1.DEFAULT_SERVICE_NAME, 'v1', 'publishAssets');
 
     const parameters = {
       options: {
@@ -1040,20 +872,16 @@ class DataVirtualizationV1 extends BaseService {
         body,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-          },
-          _params.headers
-        ),
+        headers: extend(true, sdkHeaders, {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        }, _params.headers),
       }),
     };
 
     return this.createRequest(parameters);
-  }
+  };
+
   /*************************
    * caches
    ************************/
@@ -1067,16 +895,10 @@ class DataVirtualizationV1 extends BaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DataVirtualizationV1.Response<DataVirtualizationV1.CacheListResponse>>}
    */
-  public getCachesList(
-    params?: DataVirtualizationV1.GetCachesListParams
-  ): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.CacheListResponse>> {
-    const _params = { ...params };
+  public getCachesList(params?: DataVirtualizationV1.GetCachesListParams): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.CacheListResponse>> {
+    const _params = Object.assign({}, params);
 
-    const sdkHeaders = getSdkHeaders(
-      DataVirtualizationV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getCachesList'
-    );
+    const sdkHeaders = getSdkHeaders(DataVirtualizationV1.DEFAULT_SERVICE_NAME, 'v1', 'getCachesList');
 
     const parameters = {
       options: {
@@ -1084,19 +906,14 @@ class DataVirtualizationV1 extends BaseService {
         method: 'GET',
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-            'Accept': 'application/json',
-          },
-          _params.headers
-        ),
+        headers: extend(true, sdkHeaders, {
+          'Accept': 'application/json',
+        }, _params.headers),
       }),
     };
 
     return this.createRequest(parameters);
-  }
+  };
 
   /**
    * List a cache.
@@ -1108,10 +925,8 @@ class DataVirtualizationV1 extends BaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DataVirtualizationV1.Response<DataVirtualizationV1.CacheResponse>>}
    */
-  public getCache(
-    params: DataVirtualizationV1.GetCacheParams
-  ): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.CacheResponse>> {
-    const _params = { ...params };
+  public getCache(params: DataVirtualizationV1.GetCacheParams): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.CacheResponse>> {
+    const _params = Object.assign({}, params);
     const requiredParams = ['id'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -1120,14 +935,10 @@ class DataVirtualizationV1 extends BaseService {
     }
 
     const path = {
-      'id': _params.id,
+      'id': _params.id
     };
 
-    const sdkHeaders = getSdkHeaders(
-      DataVirtualizationV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getCache'
-    );
+    const sdkHeaders = getSdkHeaders(DataVirtualizationV1.DEFAULT_SERVICE_NAME, 'v1', 'getCache');
 
     const parameters = {
       options: {
@@ -1136,19 +947,14 @@ class DataVirtualizationV1 extends BaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-            'Accept': 'application/json',
-          },
-          _params.headers
-        ),
+        headers: extend(true, sdkHeaders, {
+          'Accept': 'application/json',
+        }, _params.headers),
       }),
     };
 
     return this.createRequest(parameters);
-  }
+  };
 
   /**
    * Fetch the cache storage.
@@ -1159,16 +965,10 @@ class DataVirtualizationV1 extends BaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DataVirtualizationV1.Response<DataVirtualizationV1.StorageDetails>>}
    */
-  public getCacheStorageDetail(
-    params?: DataVirtualizationV1.GetCacheStorageDetailParams
-  ): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.StorageDetails>> {
-    const _params = { ...params };
+  public getCacheStorageDetail(params?: DataVirtualizationV1.GetCacheStorageDetailParams): Promise<DataVirtualizationV1.Response<DataVirtualizationV1.StorageDetails>> {
+    const _params = Object.assign({}, params);
 
-    const sdkHeaders = getSdkHeaders(
-      DataVirtualizationV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getCacheStorageDetail'
-    );
+    const sdkHeaders = getSdkHeaders(DataVirtualizationV1.DEFAULT_SERVICE_NAME, 'v1', 'getCacheStorageDetail');
 
     const parameters = {
       options: {
@@ -1176,19 +976,15 @@ class DataVirtualizationV1 extends BaseService {
         method: 'GET',
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-            'Accept': 'application/json',
-          },
-          _params.headers
-        ),
+        headers: extend(true, sdkHeaders, {
+          'Accept': 'application/json',
+        }, _params.headers),
       }),
     };
 
     return this.createRequest(parameters);
-  }
+  };
+
 }
 
 /*************************
@@ -1196,8 +992,9 @@ class DataVirtualizationV1 extends BaseService {
  ************************/
 
 namespace DataVirtualizationV1 {
+
   /** An operation response. */
-  export interface Response<T = any> {
+  export interface Response<T = any>  {
     result: T;
     status: number;
     statusText: string;
@@ -1208,7 +1005,7 @@ namespace DataVirtualizationV1 {
   export type Callback<T> = (error: any, response?: Response<T>) => void;
 
   /** The body of a service request that returns no response data. */
-  export interface Empty {}
+  export interface Empty { }
 
   /** A standard JS object, defined to avoid the limitations of `Object` and `object` */
   export interface JsonObject {
@@ -1770,6 +1567,7 @@ namespace DataVirtualizationV1 {
   export interface SuccessResponse {
     message: string;
   }
+
 }
 
 export = DataVirtualizationV1;
